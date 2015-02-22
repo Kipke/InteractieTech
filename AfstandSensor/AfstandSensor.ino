@@ -1,4 +1,4 @@
-const int distance = 8;
+const int distance = 7;
 
 void setup() {
   Serial.begin(9600);

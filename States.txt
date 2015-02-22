@@ -1,0 +1,10 @@
+//State
+//-1 Menu
+//0 Stand-by
+//1 In Use (Unknown)
+//2 Cleaning
+//3 In Use (#1)
+//4 In Use (#2)
+//5 Triggered
+//6 Shoot
+int state = 0;
