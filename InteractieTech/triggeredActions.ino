@@ -11,6 +11,12 @@ void triggeredActions(){
      shotTime = millis() / 1000;
   }
   int t = millis() / 1000;
+  // set the light color
+  float temp = t - shotTime;
+  float temp2 = temp / shotDelay;
+  int lightIntensity = temp2 * 255;
+  lightColor(lightIntensity,lightIntensity,lightIntensity);
+  // fire the shot if neccesary
   if (t - shotTime > shotDelay && shotTime != (-1)){    
     digitalWrite(13,HIGH);
     delay(500);

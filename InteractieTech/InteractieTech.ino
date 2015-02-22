@@ -8,8 +8,12 @@ LiquidCrystal lcd(6, 4, A2, A3, A4, A5);
 int screenLED = 5;
 int buttonPin = A1;
 
+int redPin = 11;
+int greenPin = 10;
+int bluePin = 9;
+
 int startTime, degradationTime, shotTime = -1;
-int x = 300, y = 120, z = 180 , w = 5, shotDelay = 15;
+int x = 30, y = 12, z = 18 , w = 5, shotDelay = 15;
 bool tpUsed = false;
 int shotsToFire;
 
@@ -20,7 +24,12 @@ void setup() {
   state = STANDBY;
   // Set the LCD backlight as an output
   pinMode(screenLED,OUTPUT);
+  // Set the actuater pin as an output
   pinMode(13,OUTPUT);
+  // set the color pins as outputs
+  pinMode(11,OUTPUT);
+  pinMode(10,OUTPUT);
+  pinMode(9,OUTPUT);
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
 
@@ -66,6 +75,8 @@ void loop() {
       break;
   }
 }
+
+
 
 
 

@@ -1,5 +1,6 @@
 void number_oneActions(){
   // light is yellow
+  lightColor(255,255,0); 
   // if door opens or no movement
     int v = analogRead(buttonPin);
     if(v > 1000){

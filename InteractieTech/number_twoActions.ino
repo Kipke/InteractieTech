@@ -1,5 +1,6 @@
 void number_twoActions(){
-  // light is red/brown
+  // light is red
+  lightColor(255,0,0);
   // if door opens or no movement
     // if door opens or no movement
     int v = analogRead(buttonPin);

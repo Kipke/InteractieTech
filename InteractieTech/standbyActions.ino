@@ -1,5 +1,6 @@
 void standbyActions(){
-  // light is off
+  // light is off  
+  lightColor(0,0,0);
   // turn screen backlight off
   digitalWrite(screenLED,LOW);
   // if motion or door

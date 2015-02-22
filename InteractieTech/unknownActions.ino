@@ -1,5 +1,6 @@
 void unknownActions(){
   // light is white
+  lightColor(255,255,255);
     // turn screen backlight on
   digitalWrite(screenLED,HIGH);
   // start timer -- timer already started in standby
