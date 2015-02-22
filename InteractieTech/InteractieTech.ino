@@ -1,4 +1,5 @@
 #include <LiquidCrystal.h>
+#include <EEPROM.h>
 
 enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU};
 State state;
@@ -16,6 +17,7 @@ int startTime, degradationTime, shotTime = -1;
 int x = 30, y = 12, z = 18 , w = 5, shotDelay = 15;
 bool tpUsed = false;
 int shotsToFire;
+int shotsRemaining;
 
 void setup() {
   // put your setup code here, to run once:
