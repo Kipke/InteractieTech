@@ -3,11 +3,10 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+// State declaration
 enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU};
-State state;
 
-LiquidCrystal lcd(6, 4, A2, A3, A4, A5);
-
+// CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {
   B01000,
   B10100,
@@ -17,16 +16,40 @@ byte degree[8] = {
   B00000,
   B00000,
 };
+// END OF CUSTOM CHARACTER DECLARATIONS
 
-int screenLED = 5;
+// PIN DECLARATIONS
+
+// light sensor port
+int lightSensor = A0;
+// analogue button port
 int buttonPin = A1;
+// lcd ports (by label)
+int lcdD4 = A2;
+int lcdD5 = A3;
+int lcdD6 = A4;
+int lcdD7 = A5;
 
-int temperaturePin = 12;
-
-int redPin = 11;
-int greenPin = 10;
+int lcdRs = 4;
+int lcdEnable  = 2;
+// Led backlight for LCD port
+int screenLED = 3;
+// distance sensor pin
+int distanceSensor = 7;
+// motion sensor pin
+int motionSensor = 8;
+// RGB led pins
 int bluePin = 9;
+int greenPin = 10;
+int redPin = 11;
+// temperature sensor pin
+int temperaturePin = 12;
+// mechanical actuator pin
+int actuator = 13;
 
+// END OF PIN DECLARATIONS
+
+// VARIABLE DECLARATIONS
 int startTime, degradationTime, shotTime = -1;
 int x = 30, y = 12, z = 18 , w = 5, shotDelay = 15;
 bool tpUsed = false;
@@ -34,10 +57,18 @@ int shotsToFire;
 int shotsRemaining;
 int temperature;
 
+// the state as defined above
+State state;
+
+// lcd initialization
+LiquidCrystal lcd(lcdRs, lcdEnable, lcdD4, lcdD5, lcdD6, lcdD7);
+
 // variables for the temperature
 OneWire oneWire(temperaturePin);
 DallasTemperature sensors(&oneWire);
 DeviceAddress thermometer;
+
+// END OF VARIABLE DECLARATIONS
 
 void setup() {
   // put your setup code here, to run once:
@@ -47,24 +78,23 @@ void setup() {
   // Set the initial state to standby
   state = STANDBY;
   // Set the LCD backlight as an output
-  pinMode(screenLED,OUTPUT);
+  pinMode(screenLED,OUTPUT);  
   // Set the actuater pin as an output
-  pinMode(13,OUTPUT);
+  pinMode(actuator,OUTPUT);  
   // set the color pins as outputs
-  pinMode(11,OUTPUT);
-  pinMode(10,OUTPUT);
-  pinMode(9,OUTPUT);
-  // set up the LCD's number of columns and rows:
+  pinMode(redPin,OUTPUT);
+  pinMode(greenPin,OUTPUT);
+  pinMode(bluePin,OUTPUT);  
+  // create the custom degree character
   lcd.createChar(0,degree);
-  lcd.begin(16, 2);  
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);    
   // setup the temperature sensor
   sensors.begin();
   if (!sensors.getAddress(thermometer, 0)){
     Serial.println("Unable to find address for Device 0");
   }  
   sensors.setResolution(thermometer, 9);
-
-
 }
 
 void loop() {
@@ -79,13 +109,7 @@ void loop() {
       String s3 = s1 + t + "D-C";      
       print(0,s3); 
     }
-  } 
-  
-  int v = analogRead(buttonPin);
-  //char s[32];
-  //sprintf(s,"%i",v);
-  //print(0, s);  
-  
+  }     
   // Check which state we are in and then perform the actions related to that state
   switch(state){    
     case STANDBY:
