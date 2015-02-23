@@ -82,8 +82,8 @@ void loop() {
   } 
   
   int v = analogRead(buttonPin);
-  char s[32];
-  sprintf(s,"%i",v);
+  //char s[32];
+  //sprintf(s,"%i",v);
   //print(0, s);  
   
   // Check which state we are in and then perform the actions related to that state
