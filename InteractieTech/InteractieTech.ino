@@ -6,6 +6,9 @@
 // State declaration
 enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU};
 
+//Define menu enumerable
+enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, NUMER_TWO_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL};
+
 // CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {
   B01000,
@@ -51,7 +54,7 @@ int actuator = 13;
 
 // VARIABLE DECLARATIONS
 int startTime, degradationTime, shotTime = -1;
-long x = 30000, y = 12000, z = 18000, w = 5000, shotDelay = 15;
+long x = 30000, y = 12000, z = 18000, w = 5000, shotDelay = 15, menuExit = 60000;
 bool tpUsed = false;
 int shotsToFire;
 int shotsRemaining;
@@ -59,6 +62,8 @@ int temperature;
 
 // the state as defined above
 State state;
+// the menu as defined aboce
+Menu menu;
 
 // lcd initialization
 LiquidCrystal lcd(lcdRs, lcdEnable, lcdD4, lcdD5, lcdD6, lcdD7);
@@ -68,11 +73,18 @@ OneWire oneWire(temperaturePin);
 DallasTemperature sensors(&oneWire);
 DeviceAddress thermometer;
 
-//Button declaration
+// Button declaration
 bool doorClosed;
 bool button1Pressed; //Spray
 bool button2Pressed; //Menu
 bool button3Pressed; //Next
+
+// Menu last button state
+bool button2Prev;
+bool button3Prev;
+// Menu Select
+bool menuSelect = false;
+long menuValue = 10000;
 
 // END OF VARIABLE DECLARATIONS
 
@@ -83,6 +95,8 @@ void setup() {
   Serial.begin(9600);
   // Set the initial state to standby
   state = STANDBY;
+  // Set the initial menu to cleaning_time
+  menu = CLEANING_TIME;
   // Set the LCD backlight as an output
   pinMode(screenLED,OUTPUT);  
   // Set the actuater pin as an output
@@ -106,17 +120,29 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   
-  // Code that has to be done regardless of state (with the exception of the menu)
+  // Code that has to be done regardless of state
   // ButtonCheck
   checkButtons();
-  // Temperature update
+  if (button1Pressed){
+   state = TRIGGERED;
+  }
+    
   if(state != MENU){
-    sensors.requestTemperatures();
-    int t = sensors.getTempC(thermometer);
-    if(t != temperature){
-      String s1 = "Temp: ";
-      String s3 = s1 + t + "D-C";      
-      print(0,s3); 
+    if (button2Pressed){
+      // Menu enter
+      startTime = millis();
+      state = MENU;
+    }
+    else
+    {
+      // Temperature update
+      sensors.requestTemperatures();
+      int t = sensors.getTempC(thermometer);
+      if(t != temperature){
+        String s1 = "Temp: ";
+        String s3 = s1 + t + "D-C";      
+        print(0,s3);
+      } 
     }
   }     
   // Check which state we are in and then perform the actions related to that state
