@@ -11,7 +11,7 @@ void unknownActions(){
   }
   // if enough time has elapsed before the door closes 
   // state = CLEANING;
-  if(timeElapsed(startTime, x)){
+  if(timeElapsed(startTime, cleaningTime)){
      state = CLEANING; 
   }
   // if time > x
