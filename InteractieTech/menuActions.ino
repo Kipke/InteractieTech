@@ -1,8 +1,6 @@
 void menuActions(){
   // light is blue
   lightColor(0,0,255);
-  // Show manual
-  
   // Exit timer
   if (timeElapsed(startTime, menuExit)){
     state = STANDBY;
@@ -20,7 +18,23 @@ void menuActions(){
     //This is a new click on the button
     if (menuSelect)
     {
-      //Save menuValue to corresponding variable
+      switch (menu)
+      {
+        case CLEANING_TIME:
+          break;
+        case NUMBER_ONE_TIME:
+          break;
+        case NUMER_TWO_TIME:
+          break;
+        case DEGRADATION_TIME:
+          break;
+        case DEGRADATION:
+          break;
+        case MANUAL:
+          
+          break;
+      }
+      menuSelect = false;
     }
     else
     {
@@ -35,10 +49,27 @@ void menuActions(){
     //This is a new click on the button
     if (menuSelect)
     {
-      //Increment menuValue
-      menuValue += 10000; // increment of 10 seconds
-      if (menuValue > 600000) // maximum of 10 minutes 
-        menuValue = 10000; // reset to 10 seconds
+      if (menu == CLEANING_TIME || menu == NUMBER_ONE_TIME || menu == NUMER_TWO_TIME || menu == DEGRADATION_TIME)
+      {
+        //Increment menuValue
+        menuValue += 10000; // increment of 10 seconds
+        if (menuValue > 600000) // maximum of 10 minutes 
+          menuValue = 10000; // reset to 10 seconds
+      }
+      else if (menu == DEGRADATION)
+      {
+        // Change menuValue
+        menuValue += 1; // False to true
+        if (menuValue > 1) // Maximum of true
+          menuValue = 0; // Reset to false
+      }
+      else if (menu == MANUAL)
+      {
+        // Keep lineNumber in check
+        menuValue += 1; // Increment lineNumber
+        if menuValue > 0) // Maximum lineNumber exceeded
+          menuValue = 0; // Reset to first line
+      }
     }
     else
     {
