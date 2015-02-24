@@ -28,11 +28,35 @@ void print(int line, String text){
     }
   }
 }
+int curRed, curGreen, curBlue;
+float curIntensity = 1;
 
 void lightColor(int red, int green, int blue){
-  analogWrite(redPin,255 - red);
-  analogWrite(greenPin,255 - green);
-  analogWrite(bluePin,255 - blue);  
+  // set the new values
+  curRed   = red;
+  curGreen = green;
+  curBlue  = blue;
+  // update the light  
+  analogWrite(redPin,  255 - curRed * curIntensity);
+  analogWrite(greenPin,255 - curGreen * curIntensity);
+  analogWrite(bluePin, 255 - curBlue * curIntensity);  
+}
+
+void lightIntensity(float intensity){
+  // set the new value
+  curIntensity = intensity;
+  // update the lights
+  analogWrite(redPin,  255 - curRed * curIntensity);
+  analogWrite(greenPin,255 - curGreen * curIntensity);
+  analogWrite(bluePin, 255 - curBlue * curIntensity);  
+}
+void flipLight(){
+   //set the new intensity
+  curIntensity = 1 - curIntensity; 
+  // update the lights
+  analogWrite(redPin,  255 - curRed * curIntensity);
+  analogWrite(greenPin,255 - curGreen * curIntensity);
+  analogWrite(bluePin, 255 - curBlue * curIntensity);  
 }
 
 void writeToEEPROM(int number){

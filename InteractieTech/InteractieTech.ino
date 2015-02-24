@@ -53,8 +53,8 @@ int actuator = 13;
 // END OF PIN DECLARATIONS
 
 // VARIABLE DECLARATIONS
-int shotTime = -1;
-long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15, menuTime = 60000;
+long shotTime = -1;
+long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15000, menuTime = 60000;
 bool tpUsed = false;
 bool degradation = false;
 int shotsToFire;
