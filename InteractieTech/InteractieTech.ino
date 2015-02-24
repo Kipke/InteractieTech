@@ -174,7 +174,7 @@ void loop() {
       break;
     case MENU:
       menuActions();
-      print(1,"menu");
+      //print(1,"menu");
       break;
   }
 }
