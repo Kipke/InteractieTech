@@ -9,10 +9,9 @@ void unknownActions(){
   if(doorClosed){  
      state = NUMBER_ONE;
   }
-  int t = millis() / 1000;
   // if enough time has elapsed before the door closes 
   // state = CLEANING;
-  if(t - startTime > x){
+  if(timeElapsed(startTime, x)){
      state = CLEANING; 
   }
   // if time > x

@@ -5,7 +5,7 @@ void cleaningActions(){
   //   state = STANDBY;  
   int v = analogRead(buttonPin);
   // if door closes
-  if(v < 1000 && v > 700){  
+  if(doorClosed){  
      state = STANDBY;
   }
 }

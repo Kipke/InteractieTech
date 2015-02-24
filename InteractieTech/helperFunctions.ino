@@ -97,3 +97,8 @@ int checkButtons()
   } 
   return buttons;
 }
+
+bool timeElapsed(int since, int elapsed)
+{
+  return (millis() - since > elapsed);
+}

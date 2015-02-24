@@ -51,7 +51,7 @@ int actuator = 13;
 
 // VARIABLE DECLARATIONS
 int startTime, degradationTime, shotTime = -1;
-int x = 30, y = 12, z = 18 , w = 5, shotDelay = 15;
+long x = 30000, y = 12000, z = 18000, w = 5000, shotDelay = 15;
 bool tpUsed = false;
 int shotsToFire;
 int shotsRemaining;

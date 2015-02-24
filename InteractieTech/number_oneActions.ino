@@ -14,8 +14,7 @@ void number_oneActions(){
   //   tpUsed = true;
   // if time > y and tpUsed
   //   state = NUMBER_TWO;
-    int t = millis() / 1000;
-  if(t - startTime > y){
+  if(timeElapsed(startTime, y)){
      state = NUMBER_TWO; 
   }
 }

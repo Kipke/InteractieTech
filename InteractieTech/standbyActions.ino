@@ -8,6 +8,6 @@ void standbyActions(){
   // TODO: MOTION
   if(!doorClosed){
        state = UNKNOWN;
-       startTime = millis() / 1000;
+       startTime = millis();
   }
 }
