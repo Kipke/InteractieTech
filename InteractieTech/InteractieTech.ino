@@ -137,6 +137,7 @@ void loop() {
       // Menu enter
       startTime = millis();
       state = MENU;
+      button2Prev = true;
     }
     else
     {

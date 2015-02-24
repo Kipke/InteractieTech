@@ -75,8 +75,9 @@ int checkButtons()
     // reset the debouncing timer
     lastDebounceTime = millis();
   } 
-  if (timeElapsed(lastButtonState, debounceDelay))
+  if (timeElapsed(lastDebounceTime, debounceDelay))
   {
+    lastButtonState = buttons;
     switch (buttons)
     { 
      case 10:

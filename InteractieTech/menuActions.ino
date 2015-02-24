@@ -4,6 +4,7 @@ void menuActions(){
   // Exit timer
   if (timeElapsed(startTime, menuTime)){
     state = STANDBY;
+    startTime = millis();
   }
   // Manage button press
   // if button was used last check can't be used again untill returned to false
@@ -117,7 +118,7 @@ void menuActions(){
           print(0, "Cleaning time:");
           if (menuSelect)
           {
-            print(1, String(menuValue / 1000));
+            print(1, "Change " + String(menuValue / 1000));
           }
           else
           {
@@ -128,7 +129,7 @@ void menuActions(){
           print(0, "Number one time:");
           if (menuSelect)
           {
-            print(1, String(menuValue / 1000));
+            print(1, "Change " + String(menuValue / 1000));
           }
           else
           {
@@ -139,7 +140,7 @@ void menuActions(){
           print(0, "Menu time:");
           if (menuSelect)
           {
-            print(1, String(menuValue / 1000));
+            print(1, "Change " + String(menuValue / 1000));
           }
           else
           {
@@ -150,7 +151,7 @@ void menuActions(){
           print(0, "Degradation time:");
           if (menuSelect)
           {
-            print(1, String(menuValue / 1000));
+            print(1, "Change " + String(menuValue / 1000));
           }
           else
           {
@@ -158,10 +159,10 @@ void menuActions(){
           }
           break;
         case DEGRADATION:
-          print(0, "Degradation ON/OFF:");
+          print(0, "Degradation:");
           if (menuSelect)
           {
-            print(1, (menuValue == 1 ? "ON" : "OFF"));
+            print(1, "Change " + String((menuValue == 1 ? "ON" : "OFF")));
           }
           else
           {
@@ -172,6 +173,7 @@ void menuActions(){
           if (menuSelect)
           {
             //TODO write manual
+            print(1, "Click to close!");
           }
           else
           {
