@@ -67,7 +67,7 @@ void menuActions(){
       {
         // Keep lineNumber in check
         menuValue += 1; // Increment lineNumber
-        if menuValue > 0) // Maximum lineNumber exceeded
+        if (menuValue > 0) // Maximum lineNumber exceeded
           menuValue = 0; // Reset to first line
       }
     }
