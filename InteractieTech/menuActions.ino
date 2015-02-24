@@ -86,18 +86,23 @@ void menuActions(){
       {
         case CLEANING_TIME:
           menu = NUMBER_ONE_TIME;
+          menuValue = cleaningTime;
           break;
         case NUMBER_ONE_TIME:
           menu = MENU_TIME;
+          menuValue = numberOneTime;
           break;
         case MENU_TIME:
           menu = DEGRADATION_TIME;
+          menuValue = menuTime;
           break;
         case DEGRADATION_TIME:
           menu = DEGRADATION;
+          menuValue = degradationTime;
           break;
         case DEGRADATION:
           menu = MANUAL;
+          menuValue = degradation ? 1 : 0;
           break;
         case MANUAL:
           menu = CLEANING_TIME;

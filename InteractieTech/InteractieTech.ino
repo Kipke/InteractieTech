@@ -79,6 +79,10 @@ bool doorClosed;
 bool button1Pressed; //Spray
 bool button2Pressed; //Menu
 bool button3Pressed; //Next
+//Button debounce
+long lastDebounceTime = 0;
+long debounceDelay = 100;
+int lastButtonState;
 
 // Menu last button state
 bool button2Prev;

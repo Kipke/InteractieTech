@@ -70,41 +70,48 @@ int readFromEEPROM(){
 int checkButtons()
 {
   int buttons = analogRead(buttonPin) / 100;
-  switch (buttons)
-  { 
-   case 10:
-     //No buttons
-     doorClosed = false;
-     button1Pressed = false;
-     button2Pressed = false;
-     button3Pressed = false;
-     break;
-   case 7:
-     //Door closed
-     doorClosed = true;
-     button1Pressed = false;
-     button2Pressed = false;
-     button3Pressed = false;
-     break;
-   case 6:
-     //Button3
-     button3Pressed = true;
-     button1Pressed = false;
-     button2Pressed = false;
-     break;
-   case 5:
-     //Button2
-     button2Pressed = true;
-     button1Pressed = false;
-     break;
-   case 0:
-     //Button1
-     button1Pressed = true;
-     break;
+  // Debounce
+  if (buttons != lastButtonState) {
+    // reset the debouncing timer
+    lastDebounceTime = millis();
   } 
-  return buttons;
+  if (timeElapsed(lastButtonState, debounceDelay))
+  {
+    switch (buttons)
+    { 
+     case 10:
+       //No buttons
+       doorClosed = false;
+       button1Pressed = false;
+       button2Pressed = false;
+       button3Pressed = false;
+       break;
+     case 7:
+       //Door closed
+       doorClosed = true;
+       button1Pressed = false;
+       button2Pressed = false;
+       button3Pressed = false;
+       break;
+     case 6:
+       //Button3
+       button3Pressed = true;
+       button1Pressed = false;
+       button2Pressed = false;
+       break;
+     case 5:
+       //Button2
+       button2Pressed = true;
+       button1Pressed = false;
+       break;
+     case 0:
+       //Button1
+       button1Pressed = true;
+       break;
+    } 
+    return buttons;
+  }
 }
-
 bool timeElapsed(int since, int elapsed)
 {
   return (millis() - since > elapsed);
