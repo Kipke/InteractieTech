@@ -25,10 +25,10 @@ int lightSensor = A0;
 // analogue button port
 int buttonPin = A1;
 // lcd ports (by label)
-int lcdD4 = A2;
-int lcdD5 = A3;
-int lcdD6 = A4;
-int lcdD7 = A5;
+int lcdD4 = A5;
+int lcdD5 = A4;
+int lcdD6 = A3;
+int lcdD7 = A2;
 
 int lcdRs = 4;
 int lcdEnable  = 2;
@@ -68,6 +68,12 @@ OneWire oneWire(temperaturePin);
 DallasTemperature sensors(&oneWire);
 DeviceAddress thermometer;
 
+//Button declaration
+bool doorClosed;
+bool button1Pressed; //Spray
+bool button2Pressed; //Menu
+bool button3Pressed; //Next
+
 // END OF VARIABLE DECLARATIONS
 
 void setup() {
@@ -101,6 +107,9 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   // Code that has to be done regardless of state (with the exception of the menu)
+  // ButtonCheck
+  checkButtons();
+  // Temperature update
   if(state != MENU){
     sensors.requestTemperatures();
     int t = sensors.getTempC(thermometer);

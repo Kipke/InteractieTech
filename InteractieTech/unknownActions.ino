@@ -2,11 +2,11 @@ void unknownActions(){
   // light is white
   lightColor(255,255,255);
     // turn screen backlight on
-  digitalWrite(screenLED,HIGH);
+  digitalWrite(screenLED,LOW);
   // start timer -- timer already started in standby
-  int v = analogRead(buttonPin);
   // if door closes
-  if(v < 1000 && v > 700){  
+  // TODO Movement
+  if(doorClosed){  
      state = NUMBER_ONE;
   }
   int t = millis() / 1000;

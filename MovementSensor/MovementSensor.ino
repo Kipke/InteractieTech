@@ -1,4 +1,4 @@
-const int movement = 7;
+const int movement = 8;
 
 void setup(void)
 {

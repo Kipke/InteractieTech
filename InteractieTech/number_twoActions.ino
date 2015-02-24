@@ -4,7 +4,7 @@ void number_twoActions(){
   // if door opens or no movement
     // if door opens or no movement
     int v = analogRead(buttonPin);
-    if(v > 1000){
+    if(!doorClosed){
        shotsToFire = 2; 
        // set state to triggered
        state = TRIGGERED;
