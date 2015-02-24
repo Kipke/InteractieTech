@@ -15,6 +15,7 @@ void menuActions(){
   if (button2Pressed && ! button2Prev)
   {
     button2Prev = true;
+    startTime = millis();
     //This is a new click on the button
     if (menuSelect)
     {
@@ -51,6 +52,7 @@ void menuActions(){
   if (button3Pressed && !button3Prev)
   {
     button3Prev = true;
+    startTime = millis();
     //This is a new click on the button
     if (menuSelect)
     {
