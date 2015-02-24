@@ -1,24 +1,31 @@
 String currentText[2];
 
 void print(int line, String text){  
+  // if new text has to be written
   if(currentText[line] != text){
-    bool t = false;
-     if(text.endsWith("D-C")){
-         text.remove(text.length() - 3);
-         t = true;
-     }
-     currentText[line] = text;
-
-     lcd.clear();
-     lcd.setCursor(0,0);
-     lcd.print(currentText[0]);
-     if(t) { 
-       lcd.write(byte(0));
-       lcd.write("C");
-     }
-     lcd.setCursor(0,1);
-     lcd.print(currentText[1]);
-     //lcd.write(byte(0));
+    // clear the display and set the cursor at 0,0 
+    lcd.clear();
+    lcd.setCursor(0,0);
+    // set the new text as the currentText
+    currentText[line] = text;
+    // print the first line
+    for(int j = 0; j< 2;j++){
+      // set the cursor at the correct position
+      lcd.setCursor(0,j);  
+      for(int i = 0; i< currentText[j].length();i++){
+          // if there is a special character, deal with it
+          if(currentText[j][i] == '%'){
+            if(isDigit(currentText[j][i+1])){
+               char c = currentText[j][i+1] - '0';
+               //int t = c.toInt();
+               lcd.write(byte(c));
+               i+=2;
+            }
+          }
+          // otherwise just print the character
+          lcd.print(currentText[j][i]);      
+      }
+    }
   }
 }
 
