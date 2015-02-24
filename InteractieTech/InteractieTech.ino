@@ -140,7 +140,7 @@ void loop() {
       int t = sensors.getTempC(thermometer);
       if(t != temperature){
         String s1 = "Temp: ";
-        String s3 = s1 + t + "D-C";      
+        String s3 = s1 + t + "%0C";      
         print(0,s3);
       } 
     }
