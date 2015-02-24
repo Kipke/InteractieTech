@@ -7,7 +7,7 @@
 enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU};
 
 //Define menu enumerable
-enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, NUMER_TWO_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL};
+enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL};
 
 // CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {
@@ -54,8 +54,9 @@ int actuator = 13;
 
 // VARIABLE DECLARATIONS
 int shotTime = -1;
-long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15, menuExit = 60000;
+long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15, menuTime = 60000;
 bool tpUsed = false;
+bool degradation = false;
 int shotsToFire;
 int shotsRemaining;
 int temperature;
