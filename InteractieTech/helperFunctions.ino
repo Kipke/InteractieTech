@@ -137,7 +137,7 @@ int checkButtons()
     return buttons;
   }
 }
-bool timeElapsed(int since, int elapsed)
+bool timeElapsed(long since, long elapsed)
 {
   return (millis() - since > elapsed);
 }
