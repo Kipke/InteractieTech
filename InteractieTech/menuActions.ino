@@ -77,7 +77,7 @@ void menuActions(){
       {
         // Keep lineNumber in check
         menuValue += 1; // Increment lineNumber
-        if (menuValue > 0) // Maximum lineNumber exceeded
+        if (menuValue > 10) // Maximum lineNumber exceeded
           menuValue = 0; // Reset to first line
       }
     }
@@ -126,6 +126,9 @@ void menuActions(){
           break;
         case DEGRADATION:
           menuValue = degradation ? 1 : 0;
+          break;
+        case MANUAL:
+          menuValue = 0;
           break;
       }
   //Print on lcd
@@ -190,7 +193,8 @@ void menuActions(){
           if (menuSelect)
           {
             //TODO write manual
-            print(1, "Click to close!");
+            print(0, readme[menuValue]);
+            print(1, readme[menuValue + 1]);
           }
           else
           {
