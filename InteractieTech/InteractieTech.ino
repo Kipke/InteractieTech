@@ -144,6 +144,10 @@ void loop() {
   checkButtons();
   if (button1Pressed){
    state = TRIGGERED;
+   // turn screen backlight on
+   digitalWrite(screenLED, HIGH);
+   shotsToFire = 1;
+   degradationTime = millis();
   }
   //print(0, String(analogRead(buttonPin) / 100) + " " + String(lastButtonState));
   if(state != MENU){

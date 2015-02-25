@@ -7,6 +7,8 @@ void menuActions(){
   if (timeElapsed(startTime, menuTime)){
     state = STANDBY;
     startTime = millis();
+    print(0, "");
+    print(1, "");
   }
   // Manage button press
   // if button was used last check can't be used again untill returned to false
