@@ -2,7 +2,7 @@ void unknownActions(){
   // light is white
   lightColor(255,255,255);
     // turn screen backlight on
-  digitalWrite(screenLED,LOW);
+  digitalWrite(screenLED, HIGH);
   // start timer -- timer already started in standby
   // if door closes
   // TODO Movement
