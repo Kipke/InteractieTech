@@ -1,6 +1,8 @@
 void menuActions(){
   // light is blue
   lightColor(0,0,255);
+  // turn screen backlight on
+  digitalWrite(screenLED, HIGH);
   // Exit timer
   if (timeElapsed(startTime, menuTime)){
     state = STANDBY;

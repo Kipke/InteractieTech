@@ -80,9 +80,9 @@ bool button1Pressed; //Spray
 bool button2Pressed; //Menu
 bool button3Pressed; //Next
 //Button debounce
-long lastDebounceTime = 0;
-long debounceDelay = 100;
-int lastButtonState;
+long lastDebounceTime;
+long debounceDelay = 50;
+int lastButtonState = 10;
 
 // Menu last button state
 bool button2Prev;
@@ -131,7 +131,7 @@ void loop() {
   if (button1Pressed){
    state = TRIGGERED;
   }
-    
+  //print(0, String(analogRead(buttonPin) / 100) + " " + String(lastButtonState));
   if(state != MENU){
     if (button2Pressed){
       // Menu enter
