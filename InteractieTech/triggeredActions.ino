@@ -7,6 +7,7 @@ void triggeredActions(){
   if(shotsToFire == 0){
      state = STANDBY;
      pulses = 1;
+     shotTime = -1;
      pulseElapsed = shotDelay / 10;
      return; 
   }
@@ -39,7 +40,9 @@ void triggeredActions(){
     delay(500);
     digitalWrite(13,LOW);
     shotsToFire--;
-    shotTime = -1;
+    shotTime = millis();
+    pulses = 1;
+    pulseElapsed = shotDelay / 10;
     lightIntensity(1);
   }
 }
