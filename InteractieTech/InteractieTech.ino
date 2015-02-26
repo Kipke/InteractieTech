@@ -146,7 +146,7 @@ void setup() {
   }  
   sensors.setResolution(thermometer, 9);
   // Distance
-  attachInterrupt(distanceSensor - 3, distanceRecieved, FALLING);
+  attachInterrupt(distanceSensor - 3, distanceRecieved, CHANGE);
   // setup the motion sensor and its interrupt
   pinMode(motionSensor,INPUT);
   attachInterrupt(motionSensor - 2, motionChanged,CHANGE);
