@@ -6,9 +6,6 @@ void triggeredActions(){
   // if no movement
   if(shotsToFire == 0){
      state = STANDBY;
-     pulses = 1;
-     shotTime = -1;
-     pulseElapsed = shotDelay / 10;
      return; 
   }
   if(shotsToFire == 1){
@@ -36,11 +33,12 @@ void triggeredActions(){
   
   // fire the shot if neccesary
   if (timeElapsed(shotTime,shotDelay) && shotTime != (-1)){    
-    digitalWrite(13,HIGH);
+    digitalWrite(actuator,HIGH);
     delay(500);
-    digitalWrite(13,LOW);
+    digitalWrite(actuator,LOW);
     shotsToFire--;
-    shotTime = millis();
+    // Reset the pulse settings for the next shot
+    shotTime = -1;
     pulses = 1;
     pulseElapsed = shotDelay / 10;
     lightIntensity(1);

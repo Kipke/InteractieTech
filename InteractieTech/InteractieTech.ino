@@ -52,7 +52,7 @@ int lcdEnable  = 8;
 // Led backlight for LCD port
 int screenLED = 3;
 // distance sensor pin
-int distanceSensorTrigger = 12;
+int distanceSensorTrigger = 11;
 int distanceSensorEcho = 7;
 // motion sensor pin
 int motionSensor = 2;
@@ -63,7 +63,7 @@ int redPin = 6;
 // temperature sensor pin
 int temperaturePin = 12;
 // mechanical actuator pin
-int actuator = 13;
+int actuator = A0;
 
 // END OF PIN DECLARATIONS
 
@@ -154,11 +154,6 @@ void loop() {
   checkButtons();
   if (button1Pressed){
    state = TRIGGERED;
-   // turn screen backlight on
-   digitalWrite(screenLED, HIGH);
-   shotsToFire = 1;
-   degradationTime = millis();
-   print(0, "");
   }
   //print(0, String(analogRead(buttonPin) / 100) + " " + String(lastButtonState));
   if(state != MENU){
