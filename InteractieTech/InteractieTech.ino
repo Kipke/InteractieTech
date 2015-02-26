@@ -50,10 +50,9 @@ int lcdD7 = A2;
 int lcdRs = 4;
 int lcdEnable  = 8;
 // Led backlight for LCD port
-int screenLED = 3;
+int screenLED = 11;
 // distance sensor pin
-int distanceSensorTrigger = 11;
-int distanceSensorEcho = 7;
+int distanceSensor = 3;
 // motion sensor pin
 int motionSensor = 2;
 // RGB led pins
@@ -161,7 +160,11 @@ void loop() {
   if (pingStart < pingStop)
   {
     pingStart = millis();
+    pinMode(distanceSensor, OUTPUT);
     digitalWrite(distanceSensor, HIGH);
+    delay(5);
+    digitalWrite(distanceSensor, LOW);
+    pinMode(distanceSensor, INPUT);
   }
   // Code that has to be done regardless of state
   // ButtonCheck
