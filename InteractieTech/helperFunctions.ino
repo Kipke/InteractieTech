@@ -100,10 +100,8 @@ int checkButtons()
     lastDebounceTime = millis();
   }
   lastButtonState = buttons;
-  if (timeElapsed(lastDebounceTime, debounceDelay))
-  {
-    switch (buttons)
-    { 
+  if (timeElapsed(lastDebounceTime, debounceDelay))  {
+    switch (buttons){ 
      case 10:
        //No buttons
        doorClosed = false;
@@ -137,13 +135,10 @@ int checkButtons()
     return buttons;
   }
 }
-bool timeElapsed(long since, long elapsed)
-{
+bool timeElapsed(long since, long elapsed){
   return (millis() - since > elapsed);
 }
 
-void motionChanged(){
-  bool t = digitalRead(motionSensor);
-  motionDetected = t;
-  Serial.println(t);
+void motionChanged(){   
+  motionDetected = digitalRead(motionSensor);;  
 }

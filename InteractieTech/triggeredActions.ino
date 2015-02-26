@@ -37,6 +37,10 @@ void triggeredActions(){
     delay(500);
     digitalWrite(actuator,LOW);
     shotsToFire--;
+    // update the shotRemaining
+    shotsRemaining--;
+    // update the EEPROM
+    // writeToEEPROM(shotsRemaining);
     // Reset the pulse settings for the next shot
     shotTime = -1;
     pulses = 1;

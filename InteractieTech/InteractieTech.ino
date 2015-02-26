@@ -144,6 +144,8 @@ void setup() {
   attachInterrupt(motionSensor - 2,motionChanged,CHANGE);
   // initialize the motionDetected variable
   motionDetected = digitalRead(motionSensor);
+  // read the remaining shots from the EEPROM
+  shotsRemaining = readFromEEPROM();
 }
 
 void loop() {
@@ -165,14 +167,12 @@ void loop() {
     }
     else
     {
-      // Temperature update
+      // Temperature  and shots remaining update
       sensors.requestTemperatures();
       int t = sensors.getTempC(thermometer);
-      if(t != temperature){
-        String s1 = "Temp: ";
-        String s3 = s1 + t + "%0C";      
-        print(0,s3);
-      } 
+        String s1 = "t: ";
+        String s3 = s1 + t + "%0C SR: " + shotsRemaining;      
+        print(0,s3);       
     }
   }     
   // Check which state we are in and then perform the actions related to that state
