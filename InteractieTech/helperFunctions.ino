@@ -140,5 +140,16 @@ bool timeElapsed(long since, long elapsed){
 }
 
 void motionChanged(){   
-  motionDetected = digitalRead(motionSensor);;  
+  motionDetected = digitalRead(motionSensor);
+}
+
+void distanceRecieved() {
+  if (digitalRead(distanceSensor) == HIGH)
+    pintStart = millis();
+  else
+  {
+    pingStop = millis();
+    long duration = pingStop - pingStart;
+    lastDistance = duration / 29 / 2;
+  }
 }

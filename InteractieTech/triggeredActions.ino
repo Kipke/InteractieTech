@@ -34,7 +34,7 @@ void triggeredActions(){
   // fire the shot if neccesary
   if (timeElapsed(shotTime,shotDelay) && shotTime != (-1)){    
     digitalWrite(actuator,HIGH);
-    delay(500);
+    delay(2000);
     digitalWrite(actuator,LOW);
     shotsToFire--;
     // update the shotRemaining

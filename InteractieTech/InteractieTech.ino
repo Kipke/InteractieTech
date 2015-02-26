@@ -80,6 +80,12 @@ bool motionDetected;
 //long prevMovement;
 //int movementDelay = 1000;
 
+// Distance
+volatile unsigned long pingStart = 0; // Holds the ping start time.
+volatile unsigned long pingStop; // Holds the ping stop time.
+volatile int lastDistance; // Holds calculated distance of the ping.
+int baselineDistance = 40;
+
 // the state as defined above
 State state;
 // the menu as defined aboce
@@ -139,9 +145,11 @@ void setup() {
     Serial.println("Unable to find address for Device 0");
   }  
   sensors.setResolution(thermometer, 9);
+  // Distance
+  attachInterrupt(distanceSensor - 3, distanceRecieved, FALLING);
   // setup the motion sensor and its interrupt
   pinMode(motionSensor,INPUT);
-  attachInterrupt(motionSensor - 2,motionChanged,CHANGE);
+  attachInterrupt(motionSensor - 2, motionChanged,CHANGE);
   // initialize the motionDetected variable
   motionDetected = digitalRead(motionSensor);
   // read the remaining shots from the EEPROM
@@ -150,7 +158,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+  if (pingStart < pingStop)
+  {
+    pingStart = millis();
+    digitalWrite(distanceSensor, HIGH);
+  }
   // Code that has to be done regardless of state
   // ButtonCheck
   checkButtons();
@@ -207,9 +219,3 @@ void loop() {
       break;
   }
 }
-
-
-
-
-
-
