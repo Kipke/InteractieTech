@@ -145,7 +145,7 @@ void motionChanged(){
 
 void distanceRecieved() {
   if (digitalRead(distanceSensor) == HIGH)
-    pintStart = millis();
+    pingStart = millis();
   else
   {
     pingStop = millis();
