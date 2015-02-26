@@ -1,8 +1,8 @@
 void number_oneActions(){
   // light is yellow
   lightColor(255,255,0); 
-  // if door opens or no movement
-  if(!doorClosed){
+  // if door opens and no movement
+  if(!doorClosed && !motionDetected){
      shotsToFire = 1;
      // set state to triggered
      state = TRIGGERED;

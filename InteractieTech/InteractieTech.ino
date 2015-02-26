@@ -48,17 +48,18 @@ int lcdD6 = A3;
 int lcdD7 = A2;
 
 int lcdRs = 4;
-int lcdEnable  = 2;
+int lcdEnable  = 8;
 // Led backlight for LCD port
 int screenLED = 3;
 // distance sensor pin
-int distanceSensor = 7;
+int distanceSensorTrigger = 12;
+int distanceSensorEcho = 7;
 // motion sensor pin
-int motionSensor = 8;
+int motionSensor = 2;
 // RGB led pins
 int bluePin = 9;
 int greenPin = 10;
-int redPin = 11;
+int redPin = 6;
 // temperature sensor pin
 int temperaturePin = 12;
 // mechanical actuator pin
@@ -74,6 +75,10 @@ bool degradation = false;
 int shotsToFire;
 int shotsRemaining;
 int temperature;
+
+bool motionDetected;
+//long prevMovement;
+//int movementDelay = 1000;
 
 // the state as defined above
 State state;
@@ -134,6 +139,11 @@ void setup() {
     Serial.println("Unable to find address for Device 0");
   }  
   sensors.setResolution(thermometer, 9);
+  // setup the motion sensor and its interrupt
+  pinMode(motionSensor,INPUT);
+  attachInterrupt(motionSensor - 2,motionChanged,CHANGE);
+  // initialize the motionDetected variable
+  motionDetected = digitalRead(motionSensor);
 }
 
 void loop() {

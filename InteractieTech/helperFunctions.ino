@@ -141,3 +141,9 @@ bool timeElapsed(long since, long elapsed)
 {
   return (millis() - since > elapsed);
 }
+
+void motionChanged(){
+  bool t = digitalRead(motionSensor);
+  motionDetected = t;
+  Serial.println(t);
+}

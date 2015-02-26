@@ -4,7 +4,7 @@ void cleaningActions(){
   // if door closed or no movement
   //   state = STANDBY;
   // if door closes
-  if(doorClosed){  
+  if(doorClosed || !motionDetected){  
      state = STANDBY;
   }
 }

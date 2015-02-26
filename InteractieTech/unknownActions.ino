@@ -15,6 +15,4 @@ void unknownActions(){
   if(timeElapsed(startTime, cleaningTime)){
      state = CLEANING; 
   }
-  // if time > x
-  //   state = CLEANING;
 }

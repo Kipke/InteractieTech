@@ -4,9 +4,8 @@ void standbyActions(){
   // turn screen backlight off
   digitalWrite(screenLED, LOW);
   // if motion or door
-  // check if door is open 
-  // TODO: MOTION
-  if(!doorClosed){
+  // check if door is open and motion is detected
+  if(!doorClosed && motionDetected){
        state = UNKNOWN;
        startTime = millis();
   }
