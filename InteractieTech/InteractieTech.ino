@@ -97,6 +97,7 @@ bool motionDetected;
 // Distance Sensor
 volatile unsigned long pingStart = 0; // Holds the ping start time.
 volatile unsigned long pingStop; // Holds the ping stop time.
+long prevPing = 0;
 volatile int lastDistance; // Holds calculated distance of the ping.
 volatile int baselineDistance = -1;
 volatile int pingDelay = 500;
@@ -176,16 +177,20 @@ void setup() {
 }
 
 void loop() {
-<<<<<<< HEAD
   // put your main code here, to run repeatedly:
 
   // Code that has to be done regardless of state
   // ButtonCheck
   checkButtons();
-  if (button1Pressed){
-   state = TRIGGERED;
-  }
-  //print(0, String(analogRead(buttonPin) / 100) + " " + String(lastButtonState));
+  // if the dedicated spray button is pressed
+	if (button1Pressed){
+                // set the amount of shots to fire
+                shotsToFire = 1;
+                // start the degradation timer
+		degradationTime = millis();
+                // set the state to triggered
+                state = TRIGGERED;                
+	}
   if(state != MENU){
     if (button2Pressed && timeElapsed(menuExit, exitTime)){
       // Menu enter
@@ -234,62 +239,4 @@ void loop() {
       //print(1,"menu");
       break;
   }
-=======
-	// put your main code here, to run repeatedly:
-
-	// Code that has to be done regardless of state
-	// ButtonCheck
-	checkButtons();
-	if (button1Pressed){
-		state = TRIGGERED;
-	}
-	//print(0, String(analogRead(buttonPin) / 100) + " " + String(lastButtonState));
-	if(state != MENU){
-		if (button2Pressed){
-			// Menu enter
-			startTime = millis();
-			state = MENU;
-			button2Prev = true;
-		}
-		else{
-			// Temperature  and shots remaining update
-			sensors.requestTemperatures();
-			int t = sensors.getTempC(thermometer);
-			String s1 = "t: ";
-			String s3 = s1 + t + "%0C SR: " + shotsRemaining;      
-			print(0,s3);       
-		}
-	}     
-	// Check which state we are in and then perform the actions related to that state
-	switch(state){    
-	case STANDBY:
-		standbyActions();
-		print(1,"standby");
-		break;
-	case UNKNOWN:
-		unknownActions();
-		print(1,"unknown");
-		break;
-	case CLEANING:
-		cleaningActions();
-		print(1,"cleaning");
-		break;
-	case NUMBER_ONE:
-		number_oneActions();
-		print(1,"#1");
-		break;
-	case NUMBER_TWO:
-		number_twoActions();
-		print(1,"#2");
-		break;
-	case TRIGGERED:
-		triggeredActions();
-		print(1,"triggered");
-		break;
-	case MENU:
-		menuActions();
-		//print(1,"menu");
-		break;
-	}
->>>>>>> origin/master
 }

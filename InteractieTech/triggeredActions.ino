@@ -5,6 +5,8 @@ int pulses = 0;
 int pulseElapsed = shotDelay / 10;;
 void triggeredActions(){
 	// light is flashing color of shots remaining
+	// turn screen backlight on
+	digitalWrite(screenLED, HIGH);
 	// Shots to fire magic
 	// if no more shots left to fire, go to standby
 	if(shotsToFire == 0){

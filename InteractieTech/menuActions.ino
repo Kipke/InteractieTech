@@ -2,7 +2,6 @@
 // Björn Molenmaker - 3843874
 
 void menuActions(){
-<<<<<<< HEAD
   // light is blue
   lightColor(0,0,255);
   // turn screen backlight on
@@ -262,7 +261,7 @@ void menuActions(){
           print(1, "Click to exit!");
           break;
       }
-=======
+
 	// light is blue
 	lightColor(0,0,255);
 	// turn screen backlight on
@@ -506,5 +505,4 @@ void menuActions(){
 		print(1, "Click to exit!");
 		break;
 	}
->>>>>>> origin/master
 }
