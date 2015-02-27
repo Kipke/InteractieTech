@@ -239,7 +239,7 @@ void menuActions(){
 		}
 		break;
 	case NUMBER_ONE_TIME:
-		print(0, "Number one time:");
+		print(0, "#1 time:");
 		if (menuSelect){
 			print(1, "Change " + String(menuValue / 1000));
 		}
