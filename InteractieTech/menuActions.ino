@@ -72,8 +72,9 @@ void menuActions(){
                                 startTime = millis() - (menuTime + 1);
                                 menuSelect = false;
                         }//Select menuItem
-			else 
+	                else{
                                 menuSelect = true;
+                        }
 		}
 	}
 	// Iterate items

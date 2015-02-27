@@ -10,7 +10,7 @@
 enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU};
 
 //Define menu enumerable
-enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, DEGRADATION_TIME, DEGRADATION, RESET, MANUAL, EXIT};
+enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, SPRAY_TIME, NUMBER_ONE_SPRAYS, NUMBER_TWO_EXTRA_SPRAYS, TRIGGERED_SPRAYS, DEGRADATION_TIME, DEGRADATION, RESET, MANUAL, EXIT};
 
 // README DECLARATION
 String readmeOptions[3] = { "readme RGB",
@@ -85,15 +85,23 @@ long shotTime = -1;
 long startTime,
 	cleaningTime = 30000,
 	numberOneTime = 12000,
+        sprayTime = 1000,
 	degradationTime = 18000,
-	w = 5000,
 	shotDelay = 15000,
 	menuTime = 60000,
 	exitTime = 3000;
 volatile bool tpUsed = false;
 bool doorWasOpen = false;
-bool degradation = false;
-int shotsToFire;
+bool degradation = true;
+bool fireNumberOne = false;
+bool fireNumberTwo = false;
+bool fireTriggered = false;
+int numberOneShots = 1;
+int numberTwoShots = 1;
+int triggeredShots = 1;
+int shotsToFireNumberOne = 0;
+int shotsToFireNumberTwo = 0;
+int shotsToFireTriggered = 0;
 int shotsRemaining;
 int temperature;
 
@@ -122,14 +130,14 @@ DallasTemperature sensors(&oneWire);
 DeviceAddress thermometer;
 
 // Button declaration
-bool doorClosed;
-bool button1Pressed; //Spray
-bool button2Pressed; //Menu
-bool button3Pressed; //Next
+bool doorClosed = true;
+bool button1Pressed = false; //Spray
+bool button2Pressed = false; //Menu
+bool button3Pressed = false; //Next
 //Button debounce
 long lastDebounceTime;
 long debounceDelay = 50;
-int lastButtonState = 10;
+int lastButtonState = 7;
 
 // Menu last button state
 bool button2Prev;
