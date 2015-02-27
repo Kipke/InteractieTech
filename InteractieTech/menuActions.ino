@@ -43,7 +43,7 @@ void menuActions(){
 				menuSelect = false;
 				break;
                         case SPRAY_TIME:
-                                sprayTime = menuValue;
+                                shotDelay = menuValue;
 				menuSelect = false;
 				break;
                         case NUMBER_ONE_SPRAYS:
@@ -204,7 +204,7 @@ void menuActions(){
 			menuValue = menuTime;
 			break;
         	case SPRAY_TIME:
-        		menuValue = sprayTime;
+        		menuValue = shotDelay;
         		break;
         	case NUMBER_ONE_SPRAYS:
         		menuValue = numberOneShots;
@@ -235,7 +235,7 @@ void menuActions(){
 			print(1, "Change " + String(menuValue / 1000));
 		}
 		else{
-			print(1, String(cleaningTime / 1000));
+			print(1, String(menuValue / 1000));
 		}
 		break;
 	case NUMBER_ONE_TIME:
@@ -244,7 +244,7 @@ void menuActions(){
 			print(1, "Change " + String(menuValue / 1000));
 		}
 		else{
-			print(1, String(numberOneTime / 1000));
+			print(1, String(menuValue / 1000));
 		}
 		break;
 	case MENU_TIME:
@@ -253,7 +253,7 @@ void menuActions(){
 			print(1, "Change " + String(menuValue / 1000));
 		}
 		else         {
-			print(1, String(menuTime / 1000));
+			print(1, String(menuValue / 1000));
 		}
 		break;
 	case SPRAY_TIME:
@@ -262,34 +262,34 @@ void menuActions(){
 			print(1, "Change " + String(menuValue / 1000));
 		}
 		else         {
-			print(1, String(menuTime / 1000));
+			print(1, String(menuValue / 1000));
 		}
 		break;
 	case NUMBER_ONE_SPRAYS:
 		print(0, "#1 Sprays:");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, "Change " + String(menuValue));
 		}
 		else         {
-			print(1, String(menuTime / 1000));
+			print(1, String(menuValue));
 		}
 		break;
 	case NUMBER_TWO_EXTRA_SPRAYS:
 		print(0, "#2 Extra sprays:");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, "Change " + String(menuValue));
 		}
 		else         {
-			print(1, String(menuTime / 1000));
+			print(1, String(menuValue));
 		}
 		break;
 	case TRIGGERED_SPRAYS:
 		print(0, "Triggered sprays:");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, "Change " + String(menuValue));
 		}
 		else         {
-			print(1, String(menuTime / 1000));
+			print(1, String(menuValue));
 		}
 		break;
 	case DEGRADATION_TIME:
@@ -298,7 +298,7 @@ void menuActions(){
 			print(1, "Change " + String(menuValue / 1000));
 		}
 		else          {
-			print(1, String(degradationTime / 1000));
+			print(1, String(menuValue / 1000));
 		}
 		break;
 	case DEGRADATION:

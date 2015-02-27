@@ -83,7 +83,6 @@ long shotTime = -1;
 long startTime,
 	cleaningTime = 30000,
 	numberOneTime = 12000,
-        sprayTime = 1000,
 	degradationTime = 18000,
 	shotDelay = 15000,
 	menuTime = 60000,
