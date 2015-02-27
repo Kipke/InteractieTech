@@ -1,3 +1,6 @@
+// Reinier Maas     - 4131495
+// Björn Molenmaker - 3843874
+
 void standbyActions(){
   // light is off  
   lightColor(0,0,0);
