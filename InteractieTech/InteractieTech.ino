@@ -10,18 +10,22 @@ enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU}
 enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL};
 
 // README DECLARATION
-String readme[12] = { "State color led",
-                       "Standby off",
-                       "Unknown white",
-                       "Cleaning green",
-                       "Menu blue",
-                       "#1 yellow",
-                       "#2 red",
-                       "Triggered",
-                       "yellow flashing",
-                       "    1 remaining",
-                       "red flashing",
-                       "    2 remaining" };
+String readmeOptions[2] = { "readme RGB",
+                            "created by" };
+String readmeRGB[12] = {"State color led",
+                        "Standby off",
+                        "Unknown white",
+                        "Cleaning green",
+                        "Menu blue",
+                        "#1 yellow",
+                        "#2 red",
+                        "Triggered",
+                        "yellow flashing",
+                        "    1 remaining",
+                        "red flashing",
+                        "    2 remaining" };
+String createdBy[2] = { "Reinier Maas",
+                        "Bjorn Molenmaker" };
 
 // CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {
@@ -118,6 +122,7 @@ bool button3Prev;
 // Menu Select
 bool menuSelect = false;
 long menuValue = 10000;
+int manual = 0;
 
 // END OF VARIABLE DECLARATIONS
 

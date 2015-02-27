@@ -28,24 +28,37 @@ void menuActions(){
       {
         case CLEANING_TIME:
           cleaningTime = menuValue;
+          menuSelect = false;
           break;
         case NUMBER_ONE_TIME:
           break;
           numberOneTime = menuValue;
+          menuSelect = false;
           break;
         case MENU_TIME:
           menuTime = menuValue;
+          menuSelect = false;
           break;
         case DEGRADATION_TIME:
           degradationTime = menuValue;
+          menuSelect = false;
           break;
         case DEGRADATION:
           degradation = menuValue == 1;
+          menuSelect = false;
           break;
         case MANUAL:
+          if (manual == 0)
+          {
+            manual = menuValue + 1;
+            menuValue = 0;
+          }
+          else
+          {
+            menuSelect = false;
+          }
           break;
       }
-      menuSelect = false;
     }
     else
     {
@@ -78,9 +91,24 @@ void menuActions(){
       else if (menu == MANUAL)
       {
         // Keep lineNumber in check
-        menuValue += 1; // Increment lineNumber
-        if (menuValue > 10) // Maximum lineNumber exceeded
-          menuValue = 0; // Reset to first line
+        if (manual == 0)
+        {
+          menuValue += 1; // Increment lineNumber
+          if (menuValue > 1) // Maximum lineNumber exceeded
+            menuValue = 0; // Reset to first line
+        }
+        else if (manual == 1)
+        {
+          menuValue += 1; // Increment lineNumber
+          if (menuValue > 10) // Maximum lineNumber exceeded
+            menuValue = 0; // Reset to first line
+        }
+        else if (manual == 2)
+        {
+          menuValue += 1; // Increment lineNumber
+          if (menuValue > 0) // Maximum lineNumber exceeded
+            menuValue = 0; // Reset to first line
+        }
       }
     }
     else
@@ -130,6 +158,7 @@ void menuActions(){
           menuValue = degradation ? 1 : 0;
           break;
         case MANUAL:
+          manual = 0;
           menuValue = 0;
           break;
       }
@@ -194,9 +223,22 @@ void menuActions(){
         case MANUAL:
           if (menuSelect)
           {
-            //TODO write manual
-            print(0, readme[menuValue]);
-            print(1, readme[menuValue + 1]);
+            if (manual == 0)
+            {
+              print(0, readmeOptions[menuValue]);
+              if (menuValue < 1) print(1, readmeOptions[menuValue + 1]);
+              else print(1, readmeOptions[0]);
+            }
+            else if (manual == 1)
+            {
+              print(0, readmeRGB[menuValue]);
+              print(1, readmeRGB[menuValue + 1]);
+            }
+            else if (manual == 2)
+            {
+              print(0, createdBy[menuValue]);
+              print(1, createdBy[menuValue + 1]);
+            }
           }
           else
           {
