@@ -94,7 +94,7 @@ void menuActions(){
 				// Keep lineNumber in check
 				if (manual == 0){
 					menuValue += 1; // Increment lineNumber
-					if (menuValue > 1){ // Maximum lineNumber exceeded
+					if (menuValue > 2){ // Maximum lineNumber exceeded
 						menuValue = 0; // Reset to first line
 					}
 				}
@@ -105,6 +105,12 @@ void menuActions(){
 					}
 				}
 				else if (manual == 2){
+					menuValue += 1; // Increment lineNumber
+					if (menuValue > 3){ // Maximum lineNumber exceeded
+						menuValue = 0; // Reset to first line
+					}
+				}
+                                else if (manual == 3){
 					menuValue += 1; // Increment lineNumber
 					if (menuValue > 0){ // Maximum lineNumber exceeded
 						menuValue = 0; // Reset to first line
@@ -204,29 +210,33 @@ void menuActions(){
 		break;
 	case DEGRADATION:
 		print(0, "Degradation:");
-		if (menuSelect)          {
+		if (menuSelect){
 			print(1, "Change " + String((menuValue == 1 ? "ON" : "OFF")));
 		}
-		else          {
+		else{
 			print(1, degradation ? "ON" : "OFF");
 		}
 		break;
 	case MANUAL:
-		if (menuSelect)          {
-			if (manual == 0)            {
+		if (menuSelect){
+			if (manual == 0){
 				print(0, readmeOptions[menuValue]);
-				if (menuValue < 1) {
+				if (menuValue < 2){
 					print(1, readmeOptions[menuValue + 1]);
 				}
 				else{
 					print(1, readmeOptions[0]);
 				}
 			}
-			else if (manual == 1)            {
+			else if (manual == 1){
 				print(0, readmeRGB[menuValue]);
 				print(1, readmeRGB[menuValue + 1]);
 			}
-			else if (manual == 2)            {
+			else if (manual == 2){
+				print(0, readmeTimers[menuValue]);
+				print(1, readmeTimers[menuValue + 1]);
+			}
+                        else if (manual == 3){
 				print(0, createdBy[menuValue]);
 				print(1, createdBy[menuValue + 1]);
 			}

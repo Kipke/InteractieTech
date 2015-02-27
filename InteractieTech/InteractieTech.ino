@@ -13,7 +13,8 @@ enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU}
 enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL, EXIT};
 
 // README DECLARATION
-String readmeOptions[2] = { "readme RGB",
+String readmeOptions[3] = { "readme RGB",
+        "readme Timers",
 	"created by" };
 String readmeRGB[12] = {"State color led",
 	"Standby off",
@@ -27,6 +28,11 @@ String readmeRGB[12] = {"State color led",
 	"    1 remaining",
 	"red flashing",
 	"    2 remaining" };
+String readmeTimers[5] = {"Timer looparound",
+        "they start at 10",
+        "seconds and end",
+        "at 600 seconds", 
+        "which is 10 min."};
 String createdBy[2] = { "Reinier Maas",
 	"Bjorn Molenmaker" };
 
