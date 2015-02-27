@@ -24,7 +24,7 @@ void number_oneActions(){
 		prevPing = millis();
 	}
 	// if tp has been used
-	if (!tpUsed && lastDistance < baselineDistance / 2) {
+	if (!tpUsed && lastDistance < baselineDistance * (3/4)) {
 		tpUsed = true;
 		Serial.println("tpUsed!");     
 	}
