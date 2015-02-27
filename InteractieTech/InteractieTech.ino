@@ -133,13 +133,13 @@ bool button1Pressed = false; //Spray
 bool button2Pressed = false; //Menu
 bool button3Pressed = false; //Next
 //Button debounce
-long lastDebounceTime;
+long lastDebounceTime = 0;
 long debounceDelay = 50;
 int lastButtonState = 7;
 
 // Menu last button state
-bool button2Prev;
-bool button3Prev;
+bool button2Prev = false;
+bool button3Prev = false;
 // Menu Select
 bool menuSelect = false;
 long menuValue = 10000;

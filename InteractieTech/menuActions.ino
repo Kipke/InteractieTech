@@ -228,7 +228,7 @@ void menuActions(){
 		}
 		break;
         case RESET:
-		print(0, "RESET:");
+		print(0, "Reset:");
 		print(1, "Spray count");
 		break;
 	case MANUAL:
