@@ -59,15 +59,21 @@ void menuActions(){
 					menuSelect = false;
 				}
 				break;
-			case EXIT:
-                                startTime = millis() - (menuTime + 1);
-                                menuSelect = false;
-				break;
 			}
 		}
 		else{
-			//Select menuItem
-			menuSelect = true;
+			
+                        if(menu == RESET){
+                                writeToEEPROM(2400);
+                                shotsRemaining = 2400;
+                                menuSelect = false;
+                        } 
+                        else if(menu == EXIT){
+                                startTime = millis() - (menuTime + 1);
+                                menuSelect = false;
+                        }//Select menuItem
+			else 
+                                menuSelect = true;
 		}
 	}
 	// Iterate items
@@ -135,6 +141,9 @@ void menuActions(){
 				menu = DEGRADATION;
 				break;
 			case DEGRADATION:
+				menu = RESET;
+				break;
+			case RESET:
 				menu = MANUAL;
 				break;
 			case MANUAL:
@@ -217,6 +226,10 @@ void menuActions(){
 			print(1, degradation ? "ON" : "OFF");
 		}
 		break;
+        case RESET:
+		print(0, "RESET:");
+		print(1, "Spray count");
+		break;
 	case MANUAL:
 		if (menuSelect){
 			if (manual == 0){
@@ -243,12 +256,12 @@ void menuActions(){
 		}
 		else          {
 			print(0, "Manual:");
-			print(1, "Click to open!");
+			print(1, "Open");
 		}
 		break;
 	case EXIT:
 		print(0, "Exit:");
-		print(1, "Click to exit!");
+		print(1, "Menu");
 		break;
 	}
 }
