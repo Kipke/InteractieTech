@@ -50,9 +50,10 @@ int lcdD7 = A2;
 int lcdRs = 4;
 int lcdEnable  = 8;
 // Led backlight for LCD port
-int screenLED = 11;
+int screenLED = 7;
 // distance sensor pin
-int distanceSensor = 3;
+const int distanceSensorTrigger = 11;
+const int distanceSensorEcho = 3;
 // motion sensor pin
 int motionSensor = 2;
 // RGB led pins
@@ -69,7 +70,8 @@ int actuator = A0;
 // VARIABLE DECLARATIONS
 long shotTime = -1;
 long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15000, menuTime = 60000;
-bool tpUsed = false;
+volatile bool tpUsed = false;
+bool doorWasOpen = false;
 bool degradation = false;
 int shotsToFire;
 int shotsRemaining;
@@ -83,7 +85,9 @@ bool motionDetected;
 volatile unsigned long pingStart = 0; // Holds the ping start time.
 volatile unsigned long pingStop; // Holds the ping stop time.
 volatile int lastDistance; // Holds calculated distance of the ping.
-int baselineDistance = 40;
+volatile int baselineDistance = -1;
+volatile int pingDelay = 500;
+long prevPing = 0;
 
 // the state as defined above
 State state;
@@ -122,8 +126,6 @@ void setup() {
   
   // start the serial monitor
   Serial.begin(9600);
-  // Set the initial state to standby
-  state = STANDBY;
   // Set the initial menu to cleaning_time
   menu = CLEANING_TIME;
   // Set the LCD backlight as an output
@@ -145,7 +147,9 @@ void setup() {
   }  
   sensors.setResolution(thermometer, 9);
   // Distance
-  attachInterrupt(distanceSensor - 3, distanceRecieved, CHANGE);
+  pinMode(distanceSensorEcho,INPUT);
+  pinMode(distanceSensorTrigger,OUTPUT);
+  attachInterrupt(distanceSensorEcho - 2, distanceRecieved, CHANGE);
   // setup the motion sensor and its interrupt
   pinMode(motionSensor,INPUT);
   attachInterrupt(motionSensor - 2, motionChanged,CHANGE);
@@ -153,19 +157,13 @@ void setup() {
   motionDetected = digitalRead(motionSensor);
   // read the remaining shots from the EEPROM
   shotsRemaining = readFromEEPROM();
+  // Set the initial state to standby
+  state = STANDBY;
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (pingStart < pingStop)
-  {
-    pingStart = millis();
-    pinMode(distanceSensor, OUTPUT);
-    digitalWrite(distanceSensor, HIGH);
-    delay(5);
-    digitalWrite(distanceSensor, LOW);
-    pinMode(distanceSensor, INPUT);
-  }
+
   // Code that has to be done regardless of state
   // ButtonCheck
   checkButtons();

@@ -3,9 +3,13 @@ void unknownActions(){
   lightColor(255,255,255);
   // turn screen backlight on
   digitalWrite(screenLED, HIGH);
+  // ping the distance to set a baseline for the distanceSensor
+  if(timeElapsed(prevPing, pingDelay)){
+    pingDistance();
+    prevPing = millis();
+  }
   // start timer -- timer already started in standby
-  // if door closes
-  // TODO Movement
+  // if door closes  
   if(doorClosed){  
      state = NUMBER_ONE;
      startTime = millis();

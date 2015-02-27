@@ -1,7 +1,8 @@
-const int distanceSensorTrigger = 3;
-const int distanceSensorEcho = 11;
-int distance = 0;
-int timeout = 2500 // in microseconds
+const int distanceSensorTrigger = 11;
+const int distanceSensorEcho = 3;
+int distance;
+long pingStart, pingStop;
+
 void setup() {
   Serial.begin(9600);
   
@@ -12,18 +13,26 @@ void setup() {
 
 void loop()
 {
-  digitalWrite(distanceSensorTrigger,HIGH);
-  delay(10);
-  digitalWrite(distanceSensorTrigger,LOW);  
+  pingDistance();
   Serial.println(distance);  
 }
 
-void measureDistance(){
-    if(digitalRead(distanceSensorTrigger)){
-      int t = pulseIn(distanceSensorEcho, HIGH,timeout);      
-      distance =  t / 29 / 2;       
-    }
-    
+void measureDistance(){  
+  if(digitalRead(distanceSensorEcho)){
+    pingStart = micros();  
+  }
+  else{
+    pingStop = micros();
+    long duration = pingStop - pingStart;
+    distance = duration / 29 / 2;   
+
+  }    
+}
+
+void pingDistance(){
+  digitalWrite(distanceSensorTrigger,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(distanceSensorTrigger,LOW);  
 }
 
 

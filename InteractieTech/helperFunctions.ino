@@ -143,13 +143,27 @@ void motionChanged(){
   motionDetected = digitalRead(motionSensor);
 }
 
+volatile bool baselineSet = false;
 void distanceRecieved() {
-  if (digitalRead(distanceSensor) == HIGH)
-    pingStart = millis();
+  if (digitalRead(distanceSensorEcho))
+    pingStart = micros();
   else
   {
-    pingStop = millis();
+    pingStop = micros();
     long duration = pingStop - pingStart;
+    if(state == UNKNOWN || baselineDistance == -1){
+      baselineDistance = duration / 29 / 2;
+    }
     lastDistance = duration / 29 / 2;
+    String s = "";
+    String s1 = s + baselineDistance;
+    String s2 = s + duration / 29 / 2;
+    Serial.println(s1 + " "+ s2);
   }
+}
+
+void pingDistance(){
+  digitalWrite(distanceSensorTrigger,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(distanceSensorTrigger,LOW);  
 }
