@@ -3,37 +3,43 @@
 
 int pulses = 0;
 int pulseElapsed = shotDelay / 10;
+bool roomEmpty = false;
 void triggeredActions(){
 	// turn screen backlight on
 	digitalWrite(screenLED, HIGH);
 	// light is flashing color of shots remaining
-	if(timeElapsed(startTime,sprayTime) && doorClosed && !motionDetected){
-                if(fireTriggered){
-                        if(shotsToFireTriggered == 0){
-		               fireTriggered = false;
-	                }
-                        else
-                        {
-                                // if triggered is pushed, the light should be green
-                                lightColor(0,255,0);
-                                flashing();
-                                shotMaybe();
-                        }
+	if(roomEmpty || doorClosed && !motionDetected){
+                roomEmpty = true;
+        }
+        else{
+                return;
+        }
+        if(fireTriggered){
+                if(shotsToFireTriggered == 0){
+		        fireTriggered = false;
+	        }
+                else
+                {
+                        // if triggered is pushed, the light should be green
+                        lightColor(0,255,0);
+                        flashing();
+                        shotMaybe();
                 }
-                else if(fireNumberTwo){
-                        if(shotsToFireNumberTwo == 0){
-		               fireNumberTwo = false;
-	                }
-                        else
-                        {
-                                // if Number Two isn't finished, the light should be red
-                                lightColor(255,0,0);
-                                flashing();
-                                shotMaybe();
-                        }
+        }
+        else if(fireNumberTwo){
+                if(shotsToFireNumberTwo == 0){
+		       fireNumberTwo = false;
+	        }
+                else
+                {
+                        // if Number Two isn't finished, the light should be red
+                        lightColor(255,0,0);
+                        flashing();
+                        shotMaybe();
                 }
-                else if(fireNumberOne){
-                        if(shotsToFireNumberOne == 0){
+        }
+        else if(fireNumberOne){
+                if(shotsToFireNumberOne == 0){
 		                fireNumberOne = false;
 	                }
                         else
@@ -43,48 +49,12 @@ void triggeredActions(){
                                 flashing();
                                 shotMaybe();
                         }
-                }
-                else{
-                        // if no more shots left to fire, go to standby
-                        state = STANDBY;
-        		return;
-                }
-        }
-        else
-        {
-                //Do something fun while waiting to spray
-                //Cycle through colors of the comming shots
-                cycle();
-                return;
-        }
-        // Shots to fire magic
-	
-	
-}
-long cycleElapsed = 100;
-int current = 0;
-void cycle()
-{
-        if(timeElapsed(startTime,cycleElapsed))
-        {
-                switch(current){
-                        case 0:
-                                if(fireTriggered)
-                                        lightColor(0,255,0);
-                                break;
-                        case 1:
-                                if(fireNumberTwo)
-                                        lightColor(255,0,0);
-                                break;
-                        case 2:
-                                if(fireNumberOne)
-                                        lightColor(255,255,0);
-                                break;
-                }
         }
         else{
-                long timeRemaining = (startTime + cycleElapsed) - millis();
-                lightIntensity(timeRemaining / cycleElapsed);
+                // if no more shots left to fire, go to standby
+                state = STANDBY;
+                roomEmpty = false;
+        	return;
         }
 }
 void flashing()

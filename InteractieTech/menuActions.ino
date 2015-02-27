@@ -42,6 +42,22 @@ void menuActions(){
 				menuTime = menuValue;
 				menuSelect = false;
 				break;
+                        case SPRAY_TIME:
+                                sprayTime = menuValue;
+				menuSelect = false;
+				break;
+                        case NUMBER_ONE_SPRAYS:
+                                numberOneShots = menuValue;
+				menuSelect = false;
+				break;
+                        case NUMBER_TWO_EXTRA_SPRAYS:
+                                numberTwoShots = menuValue;
+				menuSelect = false;
+				break;
+                        case TRIGGERED_SPRAYS:
+                                triggeredShots = menuValue;
+				menuSelect = false;
+				break;
 			case DEGRADATION_TIME:
 				degradationTime = menuValue;
 				menuSelect = false;
@@ -83,13 +99,20 @@ void menuActions(){
 		startTime = millis();
 		//This is a new click on the button
 		if (menuSelect){
-			if (menu == CLEANING_TIME || menu == NUMBER_ONE_TIME || menu == MENU_TIME || menu == DEGRADATION_TIME){
+			if (menu == CLEANING_TIME || menu == NUMBER_ONE_TIME || menu == MENU_TIME || menu == SPRAY_TIME|| menu == DEGRADATION_TIME){
 				//Increment menuValue
 				menuValue += 10000; // increment of 10 seconds
 				if (menuValue > 600000){ // maximum of 10 minutes 
 					menuValue = 10000; // reset to 10 seconds
 				}
 			}
+                        else if (menu == NUMBER_ONE_SPRAYS || menu == NUMBER_TWO_EXTRA_SPRAYS || menu == TRIGGERED_SPRAYS){
+                                //Increment menuValue
+				menuValue += 1; // increment of 1 spray
+				if (menuValue > 10){ // maximum of 10 sprays 
+					menuValue = 0; // reset to 0 sprays
+				}
+                        }
 			else if (menu == DEGRADATION){
 				// Change menuValue
 				menuValue += 1; // False to true
@@ -136,6 +159,18 @@ void menuActions(){
 				menu = MENU_TIME;
 				break;
 			case MENU_TIME:
+				menu = SPRAY_TIME;
+				break;
+			case SPRAY_TIME:
+				menu = NUMBER_ONE_SPRAYS;
+				break;
+			case NUMBER_ONE_SPRAYS:
+				menu = NUMBER_TWO_EXTRA_SPRAYS;
+				break;
+			case NUMBER_TWO_EXTRA_SPRAYS:
+				menu = TRIGGERED_SPRAYS;
+				break;
+			case TRIGGERED_SPRAYS:
 				menu = DEGRADATION_TIME;
 				break;
 			case DEGRADATION_TIME:
@@ -168,7 +203,19 @@ void menuActions(){
 		case MENU_TIME:
 			menuValue = menuTime;
 			break;
-		case DEGRADATION_TIME:
+        	case SPRAY_TIME:
+        		menuValue = sprayTime;
+        		break;
+        	case NUMBER_ONE_SPRAYS:
+        		menuValue = numberOneShots;
+        		break;
+        	case NUMBER_TWO_EXTRA_SPRAYS:
+        		menuValue = numberTwoShots;
+        		break;
+        	case TRIGGERED_SPRAYS:
+        		menuValue = triggeredShots;
+        		break;
+	        case DEGRADATION_TIME:
 			menuValue = degradationTime;
 			break;
 		case DEGRADATION:
@@ -202,6 +249,42 @@ void menuActions(){
 		break;
 	case MENU_TIME:
 		print(0, "Menu time:");
+		if (menuSelect) {
+			print(1, "Change " + String(menuValue / 1000));
+		}
+		else         {
+			print(1, String(menuTime / 1000));
+		}
+		break;
+	case SPRAY_TIME:
+		print(0, "Spray time:");
+		if (menuSelect) {
+			print(1, "Change " + String(menuValue / 1000));
+		}
+		else         {
+			print(1, String(menuTime / 1000));
+		}
+		break;
+	case NUMBER_ONE_SPRAYS:
+		print(0, "#1 Sprays:");
+		if (menuSelect) {
+			print(1, "Change " + String(menuValue / 1000));
+		}
+		else         {
+			print(1, String(menuTime / 1000));
+		}
+		break;
+	case NUMBER_TWO_EXTRA_SPRAYS:
+		print(0, "#2 Extra sprays:");
+		if (menuSelect) {
+			print(1, "Change " + String(menuValue / 1000));
+		}
+		else         {
+			print(1, String(menuTime / 1000));
+		}
+		break;
+	case TRIGGERED_SPRAYS:
+		print(0, "Triggered sprays:");
 		if (menuSelect) {
 			print(1, "Change " + String(menuValue / 1000));
 		}
