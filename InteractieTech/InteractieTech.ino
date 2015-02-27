@@ -50,8 +50,6 @@ byte degree[8] = {
 
 // PIN DECLARATIONS
 
-// light sensor port
-int lightSensor = A0;
 // analogue button port
 int buttonPin = A1;
 // lcd ports (by label)
