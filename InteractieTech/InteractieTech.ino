@@ -177,12 +177,12 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+        // put your main code here, to run repeatedly:
 
-  // Code that has to be done regardless of state
-  // ButtonCheck
-  checkButtons();
-  // if the dedicated spray button is pressed
+        // Code that has to be done regardless of state
+        // ButtonCheck
+        checkButtons();
+        // if the dedicated spray button is pressed
 	if (button1Pressed){
                 // set the amount of shots to fire
                 shotsToFire = 1;
@@ -191,52 +191,52 @@ void loop() {
                 // set the state to triggered
                 state = TRIGGERED;                
 	}
-  if(state != MENU){
-    if (button2Pressed && timeElapsed(menuExit, exitTime)){
-      // Menu enter
-      startTime = millis();
-      state = MENU;
-      button2Prev = true;
-    }
-    else
-    {
-      // Temperature  and shots remaining update
-      sensors.requestTemperatures();
-      int t = sensors.getTempC(thermometer);
-        String s1 = "t: ";
-        String s3 = s1 + t + "%0C SR: " + shotsRemaining;      
-        print(0,s3);       
-    }
-  }     
-  // Check which state we are in and then perform the actions related to that state
-  switch(state){    
-    case STANDBY:
-      standbyActions();
-      print(1,"standby");
-      break;
-    case UNKNOWN:
-      unknownActions();
-      print(1,"unknown");
-      break;
-    case CLEANING:
-      cleaningActions();
-      print(1,"cleaning");
-      break;
-    case NUMBER_ONE:
-      number_oneActions();
-      print(1,"#1");
-      break;
-    case NUMBER_TWO:
-      number_twoActions();
-      print(1,"#2");
-      break;
-    case TRIGGERED:
-      triggeredActions();
-      print(1,"triggered");
-      break;
-    case MENU:
-      menuActions();
-      //print(1,"menu");
-      break;
-  }
+        if(state != MENU){
+                if (button2Pressed && timeElapsed(menuExit, exitTime)){
+                        // Menu enter
+                        startTime = millis();
+                        state = MENU;
+                        button2Prev = true;
+                }
+                else
+                {
+                        // Temperature  and shots remaining update
+                        sensors.requestTemperatures();
+                        int t = sensors.getTempC(thermometer);
+                        String s1 = "t: ";
+                        String s3 = s1 + t + "%0C SR: " + shotsRemaining;      
+                        print(0,s3);       
+                }
+        }     
+        // Check which state we are in and then perform the actions related to that state
+        switch(state){    
+              case STANDBY:
+                    standbyActions();
+                    print(1,"standby");
+                    break;
+              case UNKNOWN:
+                    unknownActions();
+                    print(1,"unknown");
+                    break;
+              case CLEANING:
+                    cleaningActions();
+                    print(1,"cleaning");
+                    break;
+              case NUMBER_ONE:
+                    number_oneActions();
+                    print(1,"#1");
+                    break;
+              case NUMBER_TWO:
+                    number_twoActions();
+                    print(1,"#2");
+                    break;
+              case TRIGGERED:
+                    triggeredActions();
+                    print(1,"triggered");
+                    break;
+              case MENU:
+                    menuActions();
+                    //print(1,"menu");
+                    break;
+        }
 }
