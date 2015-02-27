@@ -124,13 +124,13 @@ void menuActions(){
 				// Keep lineNumber in check
 				if (manual == 0){
 					menuValue += 1; // Increment lineNumber
-					if (menuValue > 2){ // Maximum lineNumber exceeded
+					if (menuValue > 3){ // Maximum lineNumber exceeded
 						menuValue = 0; // Reset to first line
 					}
 				}
 				else if (manual == 1){
 					menuValue += 1; // Increment lineNumber
-					if (menuValue > 10){ // Maximum lineNumber exceeded
+					if (menuValue > 13){ // Maximum lineNumber exceeded
 						menuValue = 0; // Reset to first line
 					}
 				}
@@ -142,7 +142,13 @@ void menuActions(){
 				}
                                 else if (manual == 3){
 					menuValue += 1; // Increment lineNumber
-					if (menuValue > 0){ // Maximum lineNumber exceeded
+					if (menuValue > 3){ // Maximum lineNumber exceeded
+						menuValue = 0; // Reset to first line
+					}
+				}
+                                else if (manual == 4){
+					menuValue += 1; // Increment lineNumber
+					if (menuValue > 2){ // Maximum lineNumber exceeded
 						menuValue = 0; // Reset to first line
 					}
 				}
@@ -318,7 +324,7 @@ void menuActions(){
 		if (menuSelect){
 			if (manual == 0){
 				print(0, readmeOptions[menuValue]);
-				if (menuValue < 2){
+				if (menuValue < 3){
 					print(1, readmeOptions[menuValue + 1]);
 				}
 				else{

@@ -58,6 +58,7 @@ void triggeredActions(){
                 // if no more shots left to fire, go to standby
                 state = STANDBY;
                 roomEmpty = false;
+                degradated = 0;
         	return;
         }
 }

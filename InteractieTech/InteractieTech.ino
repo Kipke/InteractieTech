@@ -13,28 +13,39 @@ enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU}
 enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, SPRAY_TIME, NUMBER_ONE_SPRAYS, NUMBER_TWO_EXTRA_SPRAYS, TRIGGERED_SPRAYS, DEGRADATION_TIME, DEGRADATION, RESET, MANUAL, EXIT};
 
 // README DECLARATION
-String readmeOptions[3] = { "readme RGB",
+const String readmeOptions[4] = { "readme RGB",
         "readme Timers",
+        "readme Sprays",
 	"created by" };
-String readmeRGB[12] = {"State color led",
+const String readmeRGB[15] = {"State color led",
 	"Standby off",
 	"Unknown white",
 	"Cleaning green",
 	"Menu blue",
 	"#1 yellow",
 	"#2 red",
-	"Triggered",
-	"yellow flashing",
-	"    1 remaining",
+	"TRIGGERED",
+        "green flashing",
+        " process trigger"
 	"red flashing",
-	"    2 remaining" };
-String readmeTimers[5] = {"Timer looparound",
+	" process #2",
+	"yellow flashing",
+	" process #1",
+        "led on spraying" };
+const String readmeTimers[5] = {"Timer looparound",
         "they start at 10",
         "seconds and end",
         "at 600 seconds", 
         "which is 10 min."};
-String createdBy[2] = { "Reinier Maas",
-	"Bjorn Molenmaker" };
+const String readmeSprays[5] = {"Sprays looparound",
+        "they start at 0",
+        "sprays and end",
+        "at 10 sprays", 
+        "reach 30 sprays"};
+const String createdBy[4] = { "Reinier Maas",
+	"Bjorn Molenmaker",
+        "Interactie tech.",
+        "2015 UU ICA"};
 
 // CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {
@@ -51,36 +62,36 @@ byte degree[8] = {
 // PIN DECLARATIONS
 
 // analogue button port
-int buttonPin = A1;
+const int buttonPin = A1;
 // lcd ports (by label)
-int lcdD4 = A5;
-int lcdD5 = A4;
-int lcdD6 = A3;
-int lcdD7 = A2;
+const int lcdD4 = A5;
+const int lcdD5 = A4;
+const int lcdD6 = A3;
+const int lcdD7 = A2;
 
-int lcdRs = 4;
-int lcdEnable  = 8;
+const int lcdRs = 4;
+const int lcdEnable  = 8;
 // Led backlight for LCD port
-int screenLED = 7;
+const int screenLED = 7;
 // distance sensor pin
 const int distanceSensorTrigger = 11;
 const int distanceSensorEcho = 3;
 // motion sensor pin
-int motionSensor = 2;
+const int motionSensor = 2;
 // RGB led pins
-int bluePin = 9;
-int greenPin = 10;
-int redPin = 6;
+const int bluePin = 9;
+const int greenPin = 10;
+const int redPin = 6;
 // temperature sensor pin
-int temperaturePin = 12;
+const int temperaturePin = 12;
 // mechanical actuator pin
-int actuator = A0;
+const int actuator = A0;
 
 // END OF PIN DECLARATIONS
 
 // VARIABLE DECLARATIONS
-long shotTime = -1;
-long startTime,
+unsigned long shotTime = -1;
+unsigned long startTime,
 	cleaningTime = 30000,
 	numberOneTime = 12000,
 	degradationTime = 18000,
@@ -104,12 +115,12 @@ int shotsRemaining;
 int temperature;
 
 // Motion Sensor
-bool motionDetected;
+volatile bool motionDetected;
 
 // Distance Sensor
 volatile unsigned long pingStart = 0; // Holds the ping start time.
 volatile unsigned long pingStop; // Holds the ping stop time.
-long prevPing = 0;
+unsigned long prevPing = 0;
 volatile int lastDistance; // Holds calculated distance of the ping.
 volatile int baselineDistance = -1;
 volatile int pingDelay = 500;
@@ -133,8 +144,8 @@ bool button1Pressed = false; //Spray
 bool button2Pressed = false; //Menu
 bool button3Pressed = false; //Next
 //Button debounce
-long lastDebounceTime = 0;
-long debounceDelay = 50;
+unsigned long lastDebounceTime = 0;
+const unsigned long debounceDelay = 50;
 int lastButtonState = 7;
 
 // Menu last button state
@@ -142,9 +153,9 @@ bool button2Prev = false;
 bool button3Prev = false;
 // Menu Select
 bool menuSelect = false;
-long menuValue = 10000;
+unsigned long menuValue = 10000;
 int manual = 0;
-long menuExit = 0; 
+unsigned long menuExit = 0; 
 
 // END OF VARIABLE DECLARATIONS
 
@@ -215,10 +226,8 @@ void loop() {
                 {
                         // Temperature  and shots remaining update
                         sensors.requestTemperatures();
-                        int t = sensors.getTempC(thermometer);
-                        String s1 = "t: ";
-                        String s3 = s1 + t + "%0C SR: " + shotsRemaining;      
-                        print(0,s3);       
+                        int t = sensors.getTempC(thermometer);     
+                        print(0, "t: " + String(t) + "%0C SR: " + String(shotsRemaining));       
                 }
         }     
         // Check which state we are in and then perform the actions related to that state

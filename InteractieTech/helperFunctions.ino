@@ -3,7 +3,7 @@
 
 String currentText[2];
 
-void print(int line, String text){  
+void print(int line, const String& text){  
 	// if new text has to be written
 	if(currentText[line] != text){
 		// clear the display and set the cursor at 0,0 
