@@ -7,9 +7,9 @@ void menuActions(){
   if (timeElapsed(startTime, menuTime)){
     state = STANDBY;
     startTime = millis();
+    menuExit = millis();
     print(0, "");
     print(1, "");
-    delay(exitTime);
   }
   // Manage button press
   // if button was used last check can't be used again untill returned to false
@@ -60,12 +60,7 @@ void menuActions(){
           }
           break;
          case EXIT:
-           state = STANDBY;
-           startTime = millis();
-           print(0, "");
-           print(1, "");
-           menuSelect = false;
-           delay(exitTime);
+           startTime = millis() - (menuTime + 1);
            break;
       }
     }

@@ -123,6 +123,7 @@ bool button3Prev;
 bool menuSelect = false;
 long menuValue = 10000;
 int manual = 0;
+long menuExit = 0; 
 
 // END OF VARIABLE DECLARATIONS
 
@@ -177,7 +178,7 @@ void loop() {
   }
   //print(0, String(analogRead(buttonPin) / 100) + " " + String(lastButtonState));
   if(state != MENU){
-    if (button2Pressed){
+    if (button2Pressed && timeElapsed(menuExit, exitTime)){
       // Menu enter
       startTime = millis();
       state = MENU;
