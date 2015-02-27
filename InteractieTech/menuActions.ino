@@ -61,6 +61,7 @@ void menuActions(){
 				break;
 			case EXIT:
                                 startTime = millis() - (menuTime + 1);
+                                menuSelect = false;
 				break;
 			}
 		}
