@@ -9,6 +9,7 @@ void menuActions(){
     startTime = millis();
     print(0, "");
     print(1, "");
+    delay(exitTime);
   }
   // Manage button press
   // if button was used last check can't be used again untill returned to false
@@ -58,6 +59,14 @@ void menuActions(){
             menuSelect = false;
           }
           break;
+         case EXIT:
+           state = STANDBY;
+           startTime = millis();
+           print(0, "");
+           print(1, "");
+           menuSelect = false;
+           delay(exitTime);
+           break;
       }
     }
     else
@@ -133,6 +142,9 @@ void menuActions(){
           menu = MANUAL;
           break;
         case MANUAL:
+          menu = EXIT;
+          break;
+        case EXIT:
           menu = CLEANING_TIME;
           break;
       }
@@ -245,6 +257,10 @@ void menuActions(){
             print(0, "Manual:");
             print(1, "Click to open!");
           }
+          break;
+        case EXIT:
+          print(0, "Exit:");
+          print(1, "Click to exit!");
           break;
       }
 }

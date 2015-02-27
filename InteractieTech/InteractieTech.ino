@@ -7,7 +7,7 @@
 enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU};
 
 //Define menu enumerable
-enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL};
+enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, DEGRADATION_TIME, DEGRADATION, MANUAL, EXIT};
 
 // README DECLARATION
 String readmeOptions[2] = { "readme RGB",
@@ -73,7 +73,7 @@ int actuator = A0;
 
 // VARIABLE DECLARATIONS
 long shotTime = -1;
-long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15000, menuTime = 60000;
+long startTime, cleaningTime = 30000, numberOneTime = 12000, degradationTime = 18000, w = 5000, shotDelay = 15000, menuTime = 60000, exitTime = 3000;
 volatile bool tpUsed = false;
 bool doorWasOpen = false;
 bool degradation = false;
