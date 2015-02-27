@@ -199,7 +199,8 @@ void loop() {
         // if the dedicated spray button is pressed
 	if (button1Pressed){
                 // set the amount of shots to fire
-                shotsToFire = 1;
+                fireTriggered = true;
+                shotsToFireTriggered = triggeredShots;
                 // start the degradation timer
 		degradationTime = millis();
                 // set the state to triggered
