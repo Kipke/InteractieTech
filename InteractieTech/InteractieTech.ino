@@ -90,6 +90,7 @@ long startTime,
 volatile bool tpUsed = false;
 bool doorWasOpen = false;
 bool degradation = true;
+int degradated = 0;
 bool fireNumberOne = false;
 bool fireNumberTwo = false;
 bool fireTriggered = false;

@@ -10,6 +10,10 @@ void triggeredActions(){
 	// light is flashing color of shots remaining
 	if(roomEmpty || doorClosed && !motionDetected){
                 roomEmpty = true;
+                if(degradation && degradated == 0 && timeElapsed(startTime, degradationTime))
+                        degradated == 1; // Room was not empty in time so degredation
+                else
+                        degradated == -1; // Room was empty in time no degredation
         }
         else{
                 return;
@@ -27,7 +31,7 @@ void triggeredActions(){
                 }
         }
         else if(fireNumberTwo){
-                if(shotsToFireNumberTwo == 0){
+                if(shotsToFireNumberTwo == 0 || degradated == 1){
 		       fireNumberTwo = false;
 	        }
                 else
