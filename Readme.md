@@ -9,7 +9,7 @@ Port Number | Connected
 2 |MotionSensor
 3 |Distance Sensor Echo
 4 |Display RS
-5 |Empty
+5 |Actuator
 6 |Red RGB LED
 7 |Display LED
 8 |Display E
@@ -18,7 +18,7 @@ Port Number | Connected
 11|Distance Sensor Trigger
 12|Temperature Sensor
 13|Empty
-A0|Actuator
+A0|Light Sensor
 A1|Buttons
 A2|Display D7
 A3|Display D6
@@ -36,8 +36,9 @@ State color led
 - Number One: yellow
 - Number Two: red
 - Triggered
-	- yellow flashing: One shot remaining
-	- red flashing: Two shots remaining
+	- green flashing: Processing trigger shots
+	- yellow flashing: Processing Number One shots
+	- red flashing: Processing Number Two shots
     
 
 created by: Reinier Maas & Bjorn Molenmaker
