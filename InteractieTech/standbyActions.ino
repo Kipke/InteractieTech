@@ -8,7 +8,7 @@ void standbyActions(){
   digitalWrite(screenLED, LOW);
   // if motion or door
   // check if door is open and motion is detected
-  if(!doorClosed && motionDetected){
+  if(!doorClosed && motionDetected && timeElapsed(menuExit, exitTime)){
        state = UNKNOWN;
        startTime = millis();
   }
