@@ -74,22 +74,21 @@ void menuActions(){
 				else{
 					menuSelect = false;
 				}
-				break;
 			}
 		}
 		else{
-			
-                        if(menu == RESET){
-                                writeToEEPROM(2400);
-                                shotsRemaining = 2400;
-                                menuSelect = false;
-                        } 
-                        else if(menu == EXIT){
-                                startTime = millis() - (menuTime + 1);
-                                menuSelect = false;
-                        }//Select menuItem
-	                else{
-                                menuSelect = true;
+			switch (menu){
+                                case RESET:
+                                        writeToEEPROM(2400);
+                                        shotsRemaining = 2400;
+                                        menuSelect = false;
+                                        break;
+                                case EXIT:
+                                        startTime = millis() - (menuTime + 1);
+                                        menuSelect = false;
+                                        break;
+	                        default://Select menuItem
+                                        menuSelect = true;
                         }
 		}
 	}
@@ -193,11 +192,10 @@ void menuActions(){
 				break;
 			case EXIT:
 				menu = CLEANING_TIME;
-				break;
 			}
 		}
 	}
-	//
+	// Make sure the menuValue is updated
 	if (!menuSelect){
 		switch (menu){
 		case CLEANING_TIME:
@@ -235,88 +233,88 @@ void menuActions(){
 	//Print on lcd
 	switch (menu){
 	case CLEANING_TIME:
-		print(0, "Cleaning time:");
+		print(0, "Cleaning time");
 		if (menuSelect){
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, change + String(menuValue / 1000));
 		}
 		else{
 			print(1, String(menuValue / 1000));
 		}
 		break;
 	case NUMBER_ONE_TIME:
-		print(0, "#1 time:");
+		print(0, "#1 time");
 		if (menuSelect){
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, change + String(menuValue / 1000));
 		}
 		else{
 			print(1, String(menuValue / 1000));
 		}
 		break;
 	case MENU_TIME:
-		print(0, "Menu time:");
+		print(0, "Menu time");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, change + String(menuValue / 1000));
 		}
 		else         {
 			print(1, String(menuValue / 1000));
 		}
 		break;
 	case SPRAY_TIME:
-		print(0, "Spray delay:");
+		print(0, "Spray delay");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, change + String(menuValue / 1000));
 		}
 		else         {
 			print(1, String(menuValue / 1000));
 		}
 		break;
 	case NUMBER_ONE_SPRAYS:
-		print(0, "#1 Sprays:");
+		print(0, "#1 Sprays");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue));
+			print(1, change + String(menuValue));
 		}
 		else         {
 			print(1, String(menuValue));
 		}
 		break;
 	case NUMBER_TWO_EXTRA_SPRAYS:
-		print(0, "#2 Extra sprays:");
+		print(0, "#2 Extra sprays");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue));
+			print(1, change + String(menuValue));
 		}
 		else         {
 			print(1, String(menuValue));
 		}
 		break;
 	case TRIGGERED_SPRAYS:
-		print(0, "Triggered sprays:");
+		print(0, "Triggered sprays");
 		if (menuSelect) {
-			print(1, "Change " + String(menuValue));
+			print(1, change + String(menuValue));
 		}
 		else         {
 			print(1, String(menuValue));
 		}
 		break;
 	case DEGRADATION_TIME:
-		print(0, "Degradation time:");
+		print(0, "Degradation time");
 		if (menuSelect)          {
-			print(1, "Change " + String(menuValue / 1000));
+			print(1, change + String(menuValue / 1000));
 		}
 		else          {
 			print(1, String(menuValue / 1000));
 		}
 		break;
 	case DEGRADATION:
-		print(0, "Degradation:");
+		print(0, "Degradation");
 		if (menuSelect){
-			print(1, "Change " + String((menuValue == 1 ? "ON" : "OFF")));
+			print(1, change + String((menuValue == 1 ? "ON" : "OFF")));
 		}
 		else{
 			print(1, degradation ? "ON" : "OFF");
 		}
 		break;
         case RESET:
-		print(0, "Reset:");
+		print(0, "Reset");
 		print(1, "Spray count");
 		break;
 	case MANUAL:
@@ -359,12 +357,12 @@ void menuActions(){
 			}
 		}
 		else          {
-			print(0, "Manual:");
+			print(0, "Manual");
 			print(1, "Open");
 		}
 		break;
 	case EXIT:
-		print(0, "Exit:");
+		print(0, "Exit");
 		print(1, "Menu");
 		break;
 	}

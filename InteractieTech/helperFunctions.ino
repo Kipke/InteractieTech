@@ -31,9 +31,9 @@ void print(int line, const String& text){
 		}
 	}
 }
+
 int curRed, curGreen, curBlue;
 float curIntensity = 1;
-
 void lightColor(int red, int green, int blue){
 	// set the new values
 	curRed   = red;
