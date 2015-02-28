@@ -5,7 +5,7 @@ void number_twoActions(){
 	// light is red
 	lightColor(255,0,0);
         // Set shots for this stage
-        fireNumberOne = true;
+        fireNumberTwo = true;
         shotsToFireNumberTwo = numberTwoShots;
         
 	if(!doorClosed){

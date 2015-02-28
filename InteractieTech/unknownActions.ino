@@ -10,7 +10,7 @@ void unknownActions(){
 	pingDistance();
 	// start timer -- timer already started in standby
 	// if door closes  
-	if(doorClosed){  
+	if(doorClosed && motionDetected){  
 		state = NUMBER_ONE;
 		startTime = millis();
 	}

@@ -9,11 +9,15 @@ void triggeredActions(){
 	digitalWrite(screenLED, HIGH);
 	// light is flashing color of shots remaining
 	if(roomEmpty || doorClosed && !motionDetected){
-                roomEmpty = true;
-                if(degradation && degradated == 0 && timeElapsed(startTime, degradationTime))
+                if(degradation && !roomEmpty && degradated == 0 && timeElapsed(startTime, degradationTime)){
                         degradated == 1; // Room was not empty in time so degredation
-                else
+                        //Serial.println("degradation!");
+                }
+                else{
                         degradated == -1; // Room was empty in time no degredation
+                        //Serial.println("no degradation!");
+                }
+                roomEmpty = true;
         }
         else{
                 if(fireTriggered)
@@ -37,6 +41,7 @@ void triggeredActions(){
                 }
         }
         else if(fireNumberTwo){
+                //Serial.println("number two!");
                 if(shotsToFireNumberTwo == 0 || degradated == 1){
 		       fireNumberTwo = false;
 	        }
