@@ -16,6 +16,12 @@ void triggeredActions(){
                         degradated == -1; // Room was empty in time no degredation
         }
         else{
+                if(fireTriggered)
+                        lightColor(0,255,0);
+                else if(fireNumberTwo)
+                        lightColor(255,0,0);
+                else if(fireNumberOne)
+                        lightColor(255,255,0);
                 return;
         }
         if(fireTriggered){
