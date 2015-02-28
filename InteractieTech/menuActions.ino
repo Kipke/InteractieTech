@@ -228,7 +228,6 @@ void menuActions(){
 			menuValue = degradation ? 1 : 0;
 			break;
 		case MANUAL:
-			manual = 0;
 			menuValue = 0;
 			break;
 		}
@@ -263,7 +262,7 @@ void menuActions(){
 		}
 		break;
 	case SPRAY_TIME:
-		print(0, "Spray time:");
+		print(0, "Spray delay:");
 		if (menuSelect) {
 			print(1, "Change " + String(menuValue / 1000));
 		}
