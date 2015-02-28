@@ -76,7 +76,7 @@ void dimLight(){
         float light = (float)analogRead(lightPin);
 	dimIntensity = 1.0 - ((light / 1024.0) * 4.0); 
         dimIntensity = dimIntensity > 0.01 ? dimIntensity : 0.01;
-        print(0, String(dimIntensity));
+        //print(0, String(dimIntensity));
 	// update the lights
 	analogWrite(redPin,  255 - curRed * dimIntensity * curIntensity);
 	analogWrite(greenPin,255 - curGreen * dimIntensity * curIntensity);
