@@ -267,7 +267,7 @@ void menuActions(){
 		break;
         case RESET:
 		print(0, "Reset");
-		print(1, "Spray count");
+		print(1, "Spray count " + String(shotsRemaining));
 		break;
 	case MANUAL:
 		if (menuSelect){

@@ -114,6 +114,6 @@ void shotMaybe()
 		// update the shotRemaining
 		shotsRemaining--;
 		// update the EEPROM
-		// writeToEEPROM(shotsRemaining);
+		writeToEEPROM(shotsRemaining);
 	}
 }
