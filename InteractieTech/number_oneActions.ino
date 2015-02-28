@@ -22,7 +22,7 @@ void number_oneActions(){
 	pingDistance();
 	
 	// if tp has been used
-	if (!tpUsed && lastDistance < baselineDistance / 2) {
+	if (!tpUsed && lastDuration < baselineDuration / 2) {
 		tpUsed = true;
 		Serial.println("tpUsed!");     
 	}

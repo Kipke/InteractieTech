@@ -133,9 +133,9 @@ volatile bool motionDetected;
 volatile unsigned long pingStart = 0; // Holds the ping start time.
 volatile unsigned long pingStop; // Holds the ping stop time.
 unsigned long prevPing = 0;
-volatile int lastDistance; // Holds calculated distance of the ping.
-volatile int baselineDistance = -1;
-volatile int pingDelay = 500;
+volatile unsigned long lastDuration; // Holds calculated distance of the ping.
+volatile unsigned long baselineDuration = -1;
+unsigned long pingDelay = 500;
 
 // the state as defined above
 State state;

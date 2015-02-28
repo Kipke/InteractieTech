@@ -155,17 +155,16 @@ void motionChanged(){
 	motionDetected = digitalRead(motionSensor);
 }
 
-volatile bool baselineSet = false;
 void distanceRecieved() {
 	if (digitalRead(distanceSensorEcho))
 		pingStart = micros();
 	else{
 		pingStop = micros();
 		long duration = pingStop - pingStart;
-		if(state == UNKNOWN || baselineDistance == -1){
-			baselineDistance = duration / 29 / 2;
+		if(state == UNKNOWN || baselineDuration == -1){
+			baselineDuration = duration;
 		}
-		lastDistance = duration / 29 / 2;		
+		lastDuration = duration;		
 	}
 }
 
