@@ -14,6 +14,10 @@ void unknownActions(){
 		state = NUMBER_ONE;
 		startTime = millis();
 	}
+	if(doorClosed && !motionDetected){  
+		state = STANDBY;
+		startTime = millis();
+	}
 	// if enough time has elapsed before the door closes 
 	// state = CLEANING;
 	if(timeElapsed(startTime, cleaningTime)){
