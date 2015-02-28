@@ -58,7 +58,7 @@ const char createdBy_3[] PROGMEM = "2015 UU ICA";//11
 const char *const createdBy[5] PROGMEM = {createdBy_0,createdBy_1,createdBy_2,createdBy_3,};
 
 char buffer[16];
-const char change[] = "Change: ";
+const char change[] = "Change ";
 // CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {
 	B01000,
