@@ -161,7 +161,10 @@ void distanceRecieved() {
 }
 
 void pingDistance(){
-	digitalWrite(distanceSensorTrigger,HIGH);
-	delayMicroseconds(10);
-	digitalWrite(distanceSensorTrigger,LOW);  
+	if(timeElapsed(prevPing, pingDelay)){
+		digitalWrite(distanceSensorTrigger,HIGH);
+	        delayMicroseconds(10);
+	        digitalWrite(distanceSensorTrigger,LOW);  
+		prevPing = millis();
+	}
 }

@@ -7,10 +7,7 @@ void unknownActions(){
 	// turn screen backlight on
 	digitalWrite(screenLED, HIGH);
 	// ping the distance to set a baseline for the distanceSensor
-	if(timeElapsed(prevPing, pingDelay)){
-		pingDistance();
-		prevPing = millis();
-	}
+	pingDistance();
 	// start timer -- timer already started in standby
 	// if door closes  
 	if(doorClosed){  

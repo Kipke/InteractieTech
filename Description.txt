@@ -1,28 +1,28 @@
 Description
 States
-This is a description of the different states available to our system.
+This is a description of the different states available to our system. We put "Menu" as first as it is reachable from each other state instantly. With it's dedicated button (2), the “Menu/Select” button. The "Triggered" is a state also reachable from a dedicated button (1), “Trigger” button, but it is activated automatically from either state "#1" or "#2" to fire their shots. That's why this one is put at the end, it is the last state before "Standby", where our system starts.
 Menu
-This is triggered with its own dedicated button (2), the “Menu/Select” button. To cycle through the menu use button (3), the “Cycle” button, and select using the “Menu/Select” button.
+This is triggered with its own dedicated “Menu/Select” button. To cycle through the menu use button (3), the “Cycle” button, and select using the “Menu/Select” button.
 When opened we start with the option to change “Cleaning time” this option describes the time you have to close your door before the “CLEANING” state is activated. If you are slow with closing your door set this to a higher value.
 Second comes the “#1 time” this option describes the minimum needed time to change a “#1” to a “#2”. This isn’t the only variable on which we chose “#2” so don’t expect exact behaviour to what you set here.
-Third comes the “Menu time” this is the menu timeout time. It describes the time before the menu automatically exits to standby. If you need more time to read the display set this to a higher value.
+Third comes the “Menu time” this is the menu time-out time. It describes the time before the menu automatically exits to standby. If you need more time to read the display set this to a higher value.
 Fourth comes the “Spray delay” this is the time between each shot of the actuator. Increasing this value will delay all shots that are being shot to spread the time that the spray has to evaporate.
 Fifth comes “#1 Sprays” these are the number of sprays that are shot after a “#1” use of the toilet. When you think your “#1” use even stinks after just one spray set it higher, don’t you want to use the spray for a simple “#1” use set it to 0.
 Sixth comes “#2 Extra sprays” these are the number of extra sprays that are shot when a “#2” use is detected. This approach is chosen because you would want more sprays to be shot when a “#2” toilet use is detected. This is added to amount of sprays that are shot for a “#1” use.
-Seventh comes “Triggered sprays” these are the number of sprays that are shot when manually triggering the device using the dedicated button (1), “Trigger” button. If you are in a “#2” use of the toilet and you think your default settings for “#2” uses won’t cut it you can press this button, the triggered function waits till you left the toilet and add these sprays to the total amount of sprays to fire.
-Eight comes “Degradation time” this is the timer that is used to determine if we lower the amount of shots when the door wasn’t closed before this timer and there was still movement in the toilet. A lot of the stinky air will already have left the toilet so extensive spraying isn’t needed anymore, we return to a “#1” spray amount. If you pushed the “Trigger” then “Triggered sprays” amount will also be fired, only “#2” sprays are cancel by the degradation function.
+Seventh comes “Triggered sprays” these are the number of sprays that are shot when manually triggering the device using the dedicated “Trigger” button. If you are in a “#2” use of the toilet and you think your default settings for “#2” uses won’t cut it you can press this button, the triggered function waits till you left the toilet and add these sprays to the total amount of sprays to fire.
+Eight comes “Degradation time” this is the timer that is used to determine if we lower the amount of shots when the door wasn’t closed before this timer and there was still movement in the toilet. A lot of the stinky air will already have left the toilet so extensive spraying isn’t needed any more, we return to a “#1” spray amount. If you pushed the “Trigger” then “Triggered sprays” amount will also be fired, only “#2” sprays are cancel by the degradation function.
 Ninth comes “Degradation” this is a simple on/off-switch for our extra function. For a more consistent use of sprays for the corresponding “#1” and “#2” uses, this will use more sprays.
 Tenth comes “Reset” this is the reset for the amount of sprays left in the can, we reset the value to 2400. Press this menu item when you have replaced the spray can to show the correct remaining sprays on the display.
 Eleventh comes “Manual” this is the manual of the device. When opened you have to “Cycle” through the chapters and “Select” the chapter you want to read. To scroll through the text use the “Cycle” button. If you are done reading a certain chapter then you close by the “Select” button again, you will end in the main menu on the “Manual” option. If you want to read another chapter just click “Select” again. Containing the following chapters “readme RGB”, “readme Timers”, “readme Sprays”, “created by”. The chapters are saved in the program space because we had overflow of our stack and heap because we used to much memory.
 Twelfth comes “Exit” this is to close the menu by hand. You end in “STANDBY” state and won’t be bothered for 3 seconds.
 Standby
-This is the default state for the system in rest.
-Unkown
-This is the state of the just woken system.
+This is the default state for the system in rest. It can either go to "Unknown" or stay in it's current state.
+Unknown
+This is the state of the just woken system. It is going to measure the time the door is opened. If this time exceeds the set variable for "Cleaning" It will switch to the "Cleaning" state. If the door is closed before this happens than that will mean that "#1 Use" is in progress, thus it will switch to "#1 Use".
 Cleaning
-The cleaning timer expired while the door was kept open.
+The cleaning timer expired while the door was kept open. This probably indicates that someone is cleaning his or her toilet. After the door closes the system goes back to "Standby", without spraying shots unless there is explicitly pushed on the dedicated "Trigger" button.
 #1 Use
-The door was closed from the “Unkown” state
+The door was closed from the “Unknown” state. We now know that someone is on the toilet we start to count how long he or she uses the toilet. We look if they use toilet-paper as that indicates that he or she maybe pooping.
 #2 Use
 Triggered
 

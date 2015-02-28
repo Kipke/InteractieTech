@@ -19,10 +19,8 @@ void number_oneActions(){
 		doorWasOpen = false;
 	}
 	// ping the distance to see if the tp is used
-	if(timeElapsed(prevPing, pingDelay)){
-		pingDistance();
-		prevPing = millis();
-	}
+	pingDistance();
+	
 	// if tp has been used
 	if (!tpUsed && lastDistance < baselineDistance / 2) {
 		tpUsed = true;
