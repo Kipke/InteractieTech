@@ -147,7 +147,7 @@ int checkButtons()
 		return buttons;
 	}
 }
-bool timeElapsed(long since, long elapsed){
+bool timeElapsed(unsigned long since, unsigned long elapsed){
 	return (millis() - since > elapsed);
 }
 
@@ -160,7 +160,7 @@ void distanceRecieved() {
 		pingStart = micros();
 	else{
 		pingStop = micros();
-		long duration = pingStop - pingStart;
+		unsigned long duration = pingStop - pingStart;
 		if(state == UNKNOWN || baselineDuration == -1){
 			baselineDuration = duration;
 		}
