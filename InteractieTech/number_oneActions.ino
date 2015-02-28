@@ -28,7 +28,7 @@ void number_oneActions(){
 	}
 	// if time > y and tpUsed
 	if(tpUsed && timeElapsed(startTime, numberOneTime)){
-		state = NUMBER_TWO; 
+		state = NUMBER_TWO;
 		tpUsed = false;
 	}
 }

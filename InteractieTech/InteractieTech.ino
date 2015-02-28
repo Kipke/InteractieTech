@@ -271,11 +271,11 @@ void loop() {
                     break;
               case NUMBER_ONE:
                     number_oneActions();
-                    print(1,"#1");
+                    print(1,"#1 sec: " + String((millis() - startTime) / 1000));
                     break;
               case NUMBER_TWO:
                     number_twoActions();
-                    print(1,"#2");
+                    print(1,"#2 sec: " + String((millis() - startTime) / 1000));
                     break;
               case TRIGGERED:
                     triggeredActions();
