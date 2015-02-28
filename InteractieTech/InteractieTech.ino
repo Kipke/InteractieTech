@@ -39,7 +39,7 @@ const char *const readmeRGB[15] PROGMEM = {readmeRGB_0,readmeRGB_1,readmeRGB_2,r
 const char readmeTimers_0[] PROGMEM = "Timer looparound";//16
 const char readmeTimers_1[] PROGMEM = "they start at 10";//16
 const char readmeTimers_2[] PROGMEM = "seconds and end";//15
-const char readmeTimers_3[] PROGMEM = "at 600 seconds";//14
+const char readmeTimers_3[] PROGMEM = "at 600 seconds,";//15
 const char readmeTimers_4[] PROGMEM = "which is 10 min.";//16
 const char *const readmeTimers[5] PROGMEM = {readmeTimers_0,readmeTimers_1,readmeTimers_2,readmeTimers_3,readmeTimers_4};
 
