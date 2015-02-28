@@ -1,6 +1,6 @@
 // Reinier Maas     - 4131495
 // Björn Molenmaker - 3843874
-
+#include <avr/pgmspace.h>
 #include <LiquidCrystal.h>
 #include <EEPROM.h>
 #include <OneWire.h>
@@ -13,39 +13,51 @@ enum State {STANDBY, UNKNOWN, CLEANING, NUMBER_ONE, NUMBER_TWO, TRIGGERED, MENU}
 enum Menu {CLEANING_TIME, NUMBER_ONE_TIME, MENU_TIME, SPRAY_TIME, NUMBER_ONE_SPRAYS, NUMBER_TWO_EXTRA_SPRAYS, TRIGGERED_SPRAYS, DEGRADATION_TIME, DEGRADATION, RESET, MANUAL, EXIT};
 
 // README DECLARATION
-const String readmeOptions[4] = { "readme RGB",
-        "readme Timers",
-        "readme Sprays",
-	"created by" };
-const String readmeRGB[15] = {"State color led",
-	"Standby off",
-	"Unknown white",
-	"Cleaning green",
-	"Menu blue",
-	"#1 yellow",
-	"#2 red",
-	"TRIGGERED",
-        "green flashing",
-        " process trigger"
-	"red flashing",
-	" process #2",
-	"yellow flashing",
-	" process #1",
-        "led on spraying" };
-const String readmeTimers[5] = {"Timer looparound",
-        "they start at 10",
-        "seconds and end",
-        "at 600 seconds", 
-        "which is 10 min."};
-const String readmeSprays[5] = {"Sprays looparound",
-        "they start at 0",
-        "sprays and end",
-        "at 10 sprays", 
-        "reach 30 sprays"};
-const String createdBy[4] = { "Reinier Maas",
-	"Bjorn Molenmaker",
-        "Interactie tech.",
-        "2015 UU ICA"};
+const char readmeOptions_0[] PROGMEM = "readme RGB";//10
+const char readmeOptions_1[] PROGMEM = "readme Timers";//13
+const char readmeOptions_2[] PROGMEM = "readme Sprays";//13
+const char readmeOptions_3[] PROGMEM = "created by";//10
+const char *const readmeOptions[4] PROGMEM = {readmeOptions_0,readmeOptions_1,readmeOptions_2,readmeOptions_3 };
+
+const char readmeRGB_0[] PROGMEM = "State color led";//15
+const char readmeRGB_1[] PROGMEM = "Standby off";//11
+const char readmeRGB_2[] PROGMEM = "Unknown white";//13
+const char readmeRGB_3[] PROGMEM = "Cleaning green";//14
+const char readmeRGB_4[] PROGMEM = "Menu blue";//9
+const char readmeRGB_5[] PROGMEM = "#1 yellow";//9
+const char readmeRGB_6[] PROGMEM = "#2 red";//6
+const char readmeRGB_7[] PROGMEM = "TRIGGERED";//9
+const char readmeRGB_8[] PROGMEM = "green flashing";//14
+const char readmeRGB_9[] PROGMEM = " process trigger";//16
+const char readmeRGB_10[] PROGMEM = "red flashing";//12
+const char readmeRGB_11[] PROGMEM = " process #2";//11
+const char readmeRGB_12[] PROGMEM = "yellow flashing";//15
+const char readmeRGB_13[] PROGMEM = " process #1";//11
+const char readmeRGB_14[] PROGMEM = "led on spraying";//15
+const char *const readmeRGB[15] PROGMEM = {readmeRGB_0,readmeRGB_1,readmeRGB_2,readmeRGB_3,readmeRGB_4,readmeRGB_5,readmeRGB_6,readmeRGB_7,readmeRGB_8,readmeRGB_9,readmeRGB_10,readmeRGB_11,readmeRGB_12,readmeRGB_13,readmeRGB_14};
+
+const char readmeTimers_0[] PROGMEM = "Timer looparound";//16
+const char readmeTimers_1[] PROGMEM = "they start at 10";//16
+const char readmeTimers_2[] PROGMEM = "seconds and end";//15
+const char readmeTimers_3[] PROGMEM = "at 600 seconds";//14
+const char readmeTimers_4[] PROGMEM = "which is 10 min.";//16
+const char *const readmeTimers[5] PROGMEM = {readmeTimers_0,readmeTimers_1,readmeTimers_2,readmeTimers_3,readmeTimers_4};
+
+const char readmeSprays_0[] PROGMEM = "Spray looparound";//16
+const char readmeSprays_1[] PROGMEM = "they start at 0";//15
+const char readmeSprays_2[] PROGMEM = "sprays and end";//14
+const char readmeSprays_3[] PROGMEM = "at 10 sprays.";//13
+const char readmeSprays_4[] PROGMEM = "Together they";//13
+const char readmeSprays_5[] PROGMEM = "reach 30 sprays.";//16
+const char *const readmeSprays[6] PROGMEM = {readmeSprays_0,readmeSprays_1,readmeSprays_2,readmeSprays_3,readmeSprays_4,readmeSprays_5};
+
+const char createdBy_0[] PROGMEM = "Reinier Maas";//12
+const char createdBy_1[] PROGMEM = "Bjorn Molenmaker";//16
+const char createdBy_2[] PROGMEM = "Interactie tech.";//16
+const char createdBy_3[] PROGMEM = "2015 UU ICA";//11
+const char *const createdBy[5] PROGMEM = {createdBy_0,createdBy_1,createdBy_2,createdBy_3,};
+
+char buffer[16];
 
 // CUSTOM CHARACTER DECLARATIONS
 byte degree[8] = {

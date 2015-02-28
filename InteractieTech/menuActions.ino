@@ -142,7 +142,7 @@ void menuActions(){
 				}
                                 else if (manual == 3){
 					menuValue += 1; // Increment lineNumber
-					if (menuValue > 3){ // Maximum lineNumber exceeded
+					if (menuValue > 4){ // Maximum lineNumber exceeded
 						menuValue = 0; // Reset to first line
 					}
 				}
@@ -323,25 +323,40 @@ void menuActions(){
 	case MANUAL:
 		if (menuSelect){
 			if (manual == 0){
-				print(0, readmeOptions[menuValue]);
+                                strcpy_P(buffer, (char*)pgm_read_word(&(readmeOptions[menuValue])));
+				print(0, buffer);
 				if (menuValue < 3){
-					print(1, readmeOptions[menuValue + 1]);
+					strcpy_P(buffer, (char*)pgm_read_word(&(readmeOptions[menuValue + 1])));
+				        print(1, buffer);
 				}
 				else{
-					print(1, readmeOptions[0]);
+					strcpy_P(buffer, (char*)pgm_read_word(&(readmeOptions[0])));
+				        print(1, buffer);
 				}
 			}
 			else if (manual == 1){
-				print(0, readmeRGB[menuValue]);
-				print(1, readmeRGB[menuValue + 1]);
+				strcpy_P(buffer, (char*)pgm_read_word(&(readmeRGB[menuValue])));
+                                print(0, buffer);
+				strcpy_P(buffer, (char*)pgm_read_word(&(readmeRGB[menuValue + 1])));
+                                print(1, buffer);
 			}
 			else if (manual == 2){
-				print(0, readmeTimers[menuValue]);
-				print(1, readmeTimers[menuValue + 1]);
+				strcpy_P(buffer, (char*)pgm_read_word(&(readmeTimers[menuValue])));
+                                print(0, buffer);
+				strcpy_P(buffer, (char*)pgm_read_word(&(readmeTimers[menuValue + 1])));
+                                print(1, buffer);
 			}
-                        else if (manual == 3){
-				print(0, createdBy[menuValue]);
-				print(1, createdBy[menuValue + 1]);
+			else if (manual == 3){
+				strcpy_P(buffer, (char*)pgm_read_word(&(readmeSprays[menuValue])));
+                                print(0, buffer);
+				strcpy_P(buffer, (char*)pgm_read_word(&(readmeSprays[menuValue + 1])));
+                                print(1, buffer);
+			}
+                        else if (manual == 4){
+				strcpy_P(buffer, (char*)pgm_read_word(&(createdBy[menuValue])));
+                                print(0, buffer);
+				strcpy_P(buffer, (char*)pgm_read_word(&(createdBy[menuValue + 1])));
+                                print(1, buffer);
 			}
 		}
 		else          {
