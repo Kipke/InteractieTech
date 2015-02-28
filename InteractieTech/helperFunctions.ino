@@ -82,6 +82,14 @@ void dimLight(){
 	analogWrite(greenPin,255 - curGreen * dimIntensity * curIntensity);
 	analogWrite(bluePin, 255 - curBlue * dimIntensity * curIntensity);
 }
+void processLed(){
+        if(timeElapsed(processTime, processElapsed)){
+                processTime = millis();
+                processState = !processState;
+                digitalWrite(processPin, processState);
+        }
+}
+
 
 void writeToEEPROM(int number){
 	// a base 256 number system is used to write to the EEPROM, because each EEPROM index can hold 256 values(it is a byte).

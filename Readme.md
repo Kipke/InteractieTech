@@ -17,7 +17,7 @@ Port Number | Connected
 10|Green RGB LED
 11|Distance Sensor Trigger
 12|Temperature Sensor
-13|Empty
+13|Processing LED
 A0|Light Sensor
 A1|Buttons
 A2|Display D7

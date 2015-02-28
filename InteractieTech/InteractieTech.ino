@@ -91,6 +91,8 @@ const int distanceSensorTrigger = 11;
 const int distanceSensorEcho = 3;
 // motion sensor pin
 const int motionSensor = 2;
+// Process led pin
+const int processPin = 13;
 // RGB led pins
 const int bluePin = 9;
 const int greenPin = 10;
@@ -105,6 +107,8 @@ const int actuator = 5;
 // VARIABLE DECLARATIONS
 unsigned long shotTime = -1;
 unsigned long startTime,
+        processTime,
+        processElapsed = 100,
 	cleaningTime = 30000,
 	numberOneTime = 12000,
 	degradationTime = 18000,
@@ -127,6 +131,8 @@ int shotsToFireTriggered = 0;
 int shotsRemaining;
 int temperature;
 
+// Process led
+bool processState = HIGH;
 // Motion Sensor
 volatile bool motionDetected;
 
@@ -183,6 +189,8 @@ void setup() {
 	pinMode(screenLED,OUTPUT);  
 	// Set the actuater pin as an output
 	pinMode(actuator,OUTPUT);  
+        // set the process pin as output
+        pinMode(processPin, OUTPUT);
 	// set the color pins as outputs
 	pinMode(redPin,OUTPUT);
 	pinMode(greenPin,OUTPUT);
@@ -216,6 +224,8 @@ void loop() {
         // put your main code here, to run repeatedly:
 
         // Code that has to be done regardless of state
+        //Processing led
+        processLed();
         // ButtonCheck
         checkButtons();
         //LightCheck
