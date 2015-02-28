@@ -72,7 +72,8 @@ byte degree[8] = {
 // END OF CUSTOM CHARACTER DECLARATIONS
 
 // PIN DECLARATIONS
-
+// analogue light port
+const int lightPin = A0;
 // analogue button port
 const int buttonPin = A1;
 // lcd ports (by label)
@@ -97,7 +98,7 @@ const int redPin = 6;
 // temperature sensor pin
 const int temperaturePin = 12;
 // mechanical actuator pin
-const int actuator = A0;
+const int actuator = 5;
 
 // END OF PIN DECLARATIONS
 
@@ -217,6 +218,8 @@ void loop() {
         // Code that has to be done regardless of state
         // ButtonCheck
         checkButtons();
+        //LightCheck
+        dimLight();
         // if the dedicated spray button is pressed
 	if (button1Pressed){
                 // set the amount of shots to fire

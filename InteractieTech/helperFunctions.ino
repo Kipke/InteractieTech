@@ -43,32 +43,44 @@ void printMenu(const String& text, unsigned long divide){
 
 int curRed, curGreen, curBlue;
 float curIntensity = 1;
+float dimIntensity = 1;
 void lightColor(int red, int green, int blue){
 	// set the new values
 	curRed   = red;
 	curGreen = green;
 	curBlue  = blue;
-	// update the light  
-	analogWrite(redPin,  255 - curRed * curIntensity);
-	analogWrite(greenPin,255 - curGreen * curIntensity);
-	analogWrite(bluePin, 255 - curBlue * curIntensity);  
+	// update the light
+	analogWrite(redPin,  255 - curRed * dimIntensity * curIntensity);
+	analogWrite(greenPin,255 - curGreen * dimIntensity * curIntensity);
+	analogWrite(bluePin, 255 - curBlue * dimIntensity * curIntensity);
 }
 
 void lightIntensity(float intensity){
 	// set the new value
 	curIntensity = intensity;
 	// update the lights
-	analogWrite(redPin,  255 - curRed * curIntensity);
-	analogWrite(greenPin,255 - curGreen * curIntensity);
-	analogWrite(bluePin, 255 - curBlue * curIntensity);  
+	analogWrite(redPin,  255 - curRed * dimIntensity * curIntensity);
+	analogWrite(greenPin,255 - curGreen * dimIntensity * curIntensity);
+	analogWrite(bluePin, 255 - curBlue * dimIntensity * curIntensity);
 }
 void flipLight(){
 	//set the new intensity
 	curIntensity = 1 - curIntensity; 
 	// update the lights
-	analogWrite(redPin,  255 - curRed * curIntensity);
-	analogWrite(greenPin,255 - curGreen * curIntensity);
-	analogWrite(bluePin, 255 - curBlue * curIntensity);  
+	analogWrite(redPin,  255 - curRed * dimIntensity * curIntensity);
+	analogWrite(greenPin,255 - curGreen * dimIntensity * curIntensity);
+	analogWrite(bluePin, 255 - curBlue * dimIntensity * curIntensity);  
+}
+void dimLight(){
+        //set the new dimming
+        float light = (float)analogRead(lightPin);
+	dimIntensity = 1.0 - ((light / 1024.0) * 4.0); 
+        dimIntensity = dimIntensity > 0.01 ? dimIntensity : 0.01;
+        print(0, String(dimIntensity));
+	// update the lights
+	analogWrite(redPin,  255 - curRed * dimIntensity * curIntensity);
+	analogWrite(greenPin,255 - curGreen * dimIntensity * curIntensity);
+	analogWrite(bluePin, 255 - curBlue * dimIntensity * curIntensity);
 }
 
 void writeToEEPROM(int number){
