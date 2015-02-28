@@ -225,6 +225,7 @@ void menuActions(){
 			menuValue = degradation ? 1 : 0;
 			break;
 		case MANUAL:
+                        manual = 0;
 			menuValue = 0;
 			break;
 		}
