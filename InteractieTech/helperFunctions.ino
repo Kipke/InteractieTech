@@ -31,7 +31,7 @@ void print(int line, const String& text){
 		}
 	}
 }
-void printMenu(const String& text, long divide){
+void printMenu(const String& text, unsigned long divide){
         print(0, text);
 	if (menuSelect){
 		print(1, change + String(menuValue / divide));
